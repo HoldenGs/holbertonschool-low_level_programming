@@ -1,0 +1,1 @@
+This project is the introduction project to the C programming language. In this project, we create scripts that teach us about gcc and the plethora of options available to it. We also perform basic operations using C code for the first time.
