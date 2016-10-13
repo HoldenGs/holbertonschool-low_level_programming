@@ -1,0 +1,1 @@
+This project is for learning about the different operators that exist in C; These include arithmetic, relational, and logical operators.
