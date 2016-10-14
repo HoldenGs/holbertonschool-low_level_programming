@@ -16,7 +16,7 @@ for (i = 0; i < 100; i++)
 	{
 		num3 = j / 10;
 		num4 = j % 10;
-		if (j > i || (num1 == num3 && num3 < num4))
+		if (j > i)
 		{
 			putchar(num1 + '0');
 			putchar(num2 + '0');
