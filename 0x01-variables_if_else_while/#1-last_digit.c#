@@ -1,0 +1,18 @@
+#include <stdlib.h>
+#include <time.h>
+
+/**
+ * main - prints the last digit of n and determines whether it's greater than
+ * or equal to zero, and whether it's greater than or less than 5
+ * Return: 0
+ */
+int main(void)
+{
+  int n, i;
+srand(time(0));
+n = rand() - RAND_MAX / 2;
+
+ if (n%10==0)
+ for (i=0; n!=0; i++, n=n/10)   printf("Last digit of %d is %d and is less than 6 and not 0", n, i)
+return (0);
+}p

@@ -6,41 +6,30 @@
  */
 int main(void)
 {
-int i, j, k, l;
+int num1, num2, num3, num4, i, j;
 
-i = j = k = l = 48;
-
-while (i < 58)
+for (i = 0; i < 100; i++)
 {
-while (j < 58)
-{
-while (k < 58)
-{
-while (l < 58)
-{
-if ((i < k || (i == k && l > j)) && !(i == l && j == k))
-{
-putchar(i);
-putchar(j);
-putchar(' ');
-putchar(k);
-putchar(l);
-if (i < 57 || j < 56)
-{
-putchar(',');
-putchar(' ');
-}
-}
-l++;
-}
-l = 48;
-k++;
-}
-j++;
-k = 48;
-}
-i++;
-j = 48;
+	num1 = i / 10;
+	num2 = i % 10;
+	for (j = 0; j < 100; j++)
+	{
+		num3 = j / 10;
+		num4 = j % 10;
+		if (j > i || (num1 == num3 && num3 < num4))
+		{
+			putchar(num1 + '0');
+			putchar(num2 + '0');
+			putchar(' ');
+       			putchar(num3 + '0');
+			putchar(num4 + '0');
+			if (i < 98)
+			{
+				putchar(',');
+				putchar(' ');
+			}
+		}
+	}
 }
 putchar('\n');
 return (0);
