@@ -18,7 +18,7 @@ while (k < 58)
 {
 while (l < 58)
 {
-if ((i + j) < (k + l))
+if ((i + j) < (k + l) && k >= i)
 {
 putchar(i);
 putchar(j);
@@ -42,5 +42,6 @@ k = 48;
 i++;
 j = 48;
 }
+putchar('\n');
 return (0);
 }
