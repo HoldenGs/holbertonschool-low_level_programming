@@ -42,6 +42,5 @@ k = 48;
 i++;
 j = 48;
 }
-putchar('\n');
 return (0);
 }
