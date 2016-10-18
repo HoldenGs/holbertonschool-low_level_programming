@@ -1,11 +1,10 @@
-int _putchar(char c);
-
 /**
  * main - prints the string "Holberton" followed by a newline
  * Return: 0
  */
 int main(void)
 {
+	int _putchar(char c);
 	char string[11] = "Holberton\n";
 	int i = 0;
 
