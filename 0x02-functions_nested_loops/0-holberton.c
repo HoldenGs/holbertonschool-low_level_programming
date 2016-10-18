@@ -9,7 +9,7 @@ int main(void)
 	char string[11] = "Holberton\n";
 	int i = 0;
 
-	while (i < 11)
+	while (i < 12)
 	{
 		_putchar(string[i]);
 		i++;
