@@ -1,4 +1,4 @@
-#include "holberton.h"
+int _putchar(char c);
 
 /**
  * main - prints the string "Holberton" followed by a newline
