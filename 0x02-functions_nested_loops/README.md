@@ -1,0 +1,1 @@
+This project is for learning how to create C header files, nested loops, functions, declarations and definitions of functions, prototypes, variable scope, and gcc flags.
