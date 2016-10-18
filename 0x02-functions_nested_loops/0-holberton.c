@@ -6,10 +6,10 @@
  */
 int main(void)
 {
-	char string[11] = "Holberton\n";
+	char string[10] = "Holberton\n";
 	int i = 0;
 
-	while (i < 11)
+	while (i < 10)
 	{
 		_putchar(string[i]);
 		i++;
