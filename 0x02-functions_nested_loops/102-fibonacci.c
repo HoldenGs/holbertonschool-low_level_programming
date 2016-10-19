@@ -7,18 +7,18 @@
  */
 int main(void)
 {
-	int i, first = 1, second = 2, next;
+	long i, first = 1, second = 2, next;
 
-	printf("%d, %d, ", first, second);
-	for (i = 0; i < 51; i++)
+	printf("%ld, %ld, ", first, second);
+	for (i = 0; i < 48; i++)
 	{
 		next = first + second;
 		first = second;
 		second = next;
-		if (i < 50)
-			printf("%d, ", next);
+		if (i < 47)
+			printf("%ld, ", next);
 		else
-			printf("%d\n", next);
+			printf("%ld\n", next);
 	}
 	return (0);
 }
