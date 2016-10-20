@@ -9,7 +9,7 @@
  */
 void print_number(int n)
 {
-	char array[100];
+	char array[100000];
 	int length = 0;
 
 	if (n == 0)
