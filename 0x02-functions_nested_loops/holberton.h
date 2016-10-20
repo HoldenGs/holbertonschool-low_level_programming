@@ -12,3 +12,4 @@ int add(int, int);
 void print_to_98(int n);
 void print_times_table(int n);
 void formatted_print(int i, int j, int n);
+void print_fibonacci(unsigned long sumbig, unsigned long sumlil);
