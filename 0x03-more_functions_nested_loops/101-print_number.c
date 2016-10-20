@@ -9,21 +9,20 @@
  */
 void print_number(int n)
 {
-	char array[100000];
-	int length = 0;
+	long array[100000], length = 0, ln = n;
 
-	if (n == 0)
+	if (ln == 0)
 		_putchar('0');
-	else if (n < 0)
+	else if (ln < 0)
 	{
 		_putchar('-');
-		n = -n;
+		ln = -ln;
 	}
 
-	while (n > 0)
+	while (ln > 0)
 	{
-		array[length] = n % 10;
-		n /= 10;
+		array[length] = ln % 10;
+		ln /= 10;
 		length++;
 	}
 
