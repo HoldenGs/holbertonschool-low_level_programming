@@ -33,16 +33,15 @@ int main(void)
 		second2 = next2;
 		next2 = first2 + second2;
 	}
-	printf("%lu", next);
-
-	if (i != 94)
-		printf(", ");
+	if (i < 94)
+		printf("%lu, ", next);
+	else
+		printf("%lu\n", next);
 
 	first = second;
 	second = next;
 	next = first + second;
 }
-	printf("\n");
 	return (0);
 }
 
