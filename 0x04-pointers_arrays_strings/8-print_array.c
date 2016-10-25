@@ -4,6 +4,10 @@
 /**
  * print_array - print an @n element array of integers, followed by a newline
  *
+ * @a: pointer to array
+ *
+ * @n: length of array
+ *
  * Return: void
  */
 void print_array(int *a, int n)
