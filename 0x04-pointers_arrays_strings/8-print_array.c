@@ -15,7 +15,7 @@ void print_array(int *a, int n)
 
 	long m = 0, p = n;
 
-	while (m < p)
+	while (*(a + n))
 	{
 		if (m == p - 1)
 			printf("%d\n", *(a + m));
