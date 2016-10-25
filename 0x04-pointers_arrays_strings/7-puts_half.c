@@ -1,11 +1,11 @@
 #include "holberton.h"
 
 /**
- * puts2 - print the last half of a string, followed by a newline
+ * puts_half - print the last half of a string, followed by a newline
  *
  * @str: string to be printed
  *
- * Return: 0
+ * Return: void
  */
 void puts_half(char *str)
 {
