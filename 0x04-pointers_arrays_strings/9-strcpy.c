@@ -1,7 +1,7 @@
 #include "holberton.h"
 
 /**
- * strcpy - copies @src string to @dest buffer, including '\0'
+ * *_strcpy - copies @src string to @dest buffer, including '\0'
  *
  * @dest: pointer to buffer for string
  *
@@ -19,5 +19,5 @@ char *_strcpy(char *dest, char *src)
 		n++;
 	}
 	*(dest + (n + 1)) = '\0';
-	return dest;
+	return (dest);
 }
