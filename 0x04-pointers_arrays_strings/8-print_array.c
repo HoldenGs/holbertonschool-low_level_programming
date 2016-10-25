@@ -13,14 +13,14 @@
 void print_array(int *a, int n)
 {
 
-	long m = 0, p = n;
+	int m = 0;
 
-	while (*(a + n))
+	while (m < n)
 	{
-		if (m == p - 1)
-			printf("%d\n", *(a + m));
-		else
-			printf("%d, ", *(a + m));
+		printf("%d", *(a + m));
+		if (m < n - 1)
+			printf(", ");
 		m++;
 	}
+	putchar('\n');
 }
