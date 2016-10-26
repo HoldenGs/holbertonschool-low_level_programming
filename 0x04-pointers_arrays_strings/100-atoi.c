@@ -15,11 +15,7 @@ int _atoi(char *s)
 	for (n = 0; *(s + n) != 0; n++)
 	{
 		if (*(s + n) == '-')
-		{
 			sign--;
-		}
-		else if (*(s + n) == '+')
-			sign++;
 		if (*(s + n) >= '0' && *(s + n) <= '9')
 		{
 			if (sign < 0)
@@ -33,13 +29,10 @@ int _atoi(char *s)
 		}
 		else if (on_int == 1)
 		{
-			if (sign < 0)
-				return (new_int);
-			else
-				return (-new_int);
+			break;
 		}
 	}
-	if (sign < 0)
+	if (sign % 2 != 0)
 		return (new_int);
 	else
 		return (-new_int);
