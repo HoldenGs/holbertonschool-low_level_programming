@@ -28,14 +28,13 @@ int _atoi(char *s)
 			}
 			else if (sign >= 0)
 				sign = 1;
-
 			on_int = 1;
-			new_int = new_int * 10 + (*(s + n) - '0');
+			new_int = new_int * 10 - (*(s + n) - '0');
 		}
 		else if (on_int == 1)
 		{
-			return (new_int * sign);
+			return (-new_int * sign);
 		}
 	}
-	return (new_int * sign);
+	return (-new_int * sign);
 }
