@@ -15,21 +15,18 @@ int _atoi(char *s)
 	for (n = 0; *(s + n) != 0; n++)
 	{
 		if (*(s + n) == '-')
-			sign--;
+			sign++;
 		if (*(s + n) >= '0' && *(s + n) <= '9')
 		{
-			if (sign < 0)
-			{
-				sign = -1;
-			}
-			else if (sign >= 0)
-				sign = 1;
 			on_int = 1;
 			new_int = new_int * 10 - (*(s + n) - '0');
 		}
 		else if (on_int == 1)
 		{
-			break;
+			if (sign % 2 != 0)
+				return (new_int);
+			else
+				return (-new_int);
 		}
 	}
 	if (sign % 2 != 0)
