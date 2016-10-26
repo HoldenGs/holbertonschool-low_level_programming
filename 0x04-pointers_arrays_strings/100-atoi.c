@@ -33,8 +33,14 @@ int _atoi(char *s)
 		}
 		else if (on_int == 1)
 		{
-			return (-new_int * sign);
+			if (sign < 0)
+				return (new_int);
+			else
+				return (-new_int);
 		}
 	}
-	return (-new_int * sign);
+	if (sign < 0)
+		return (new_int);
+	else
+		return (-new_int);
 }
