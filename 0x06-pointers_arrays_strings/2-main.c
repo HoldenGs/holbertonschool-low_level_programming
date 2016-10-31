@@ -11,7 +11,7 @@ int main(void)
 	char *s = "hello";
 	char *f;
 
-	f = _strchr(s, '\0');
+	f = _strchr(s, 'f');
 	printf("%s\n", f);
 	return (0);
 }
