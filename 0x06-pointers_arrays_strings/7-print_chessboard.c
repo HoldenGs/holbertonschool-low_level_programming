@@ -3,11 +3,11 @@
 /**
  * print_chessboard - print a chessboard
  *
- * @a[8]: 2D array matrix to be printed
+ * @a: 2D array matrix to be printed
  *
  * Return: void
  */
-void print_chessboard(char (*a)[8])
+void print_chessboard(char *a[8])
 {
 	int i, j;
 
