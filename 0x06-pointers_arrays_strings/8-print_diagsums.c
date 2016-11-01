@@ -11,22 +11,23 @@
  */
 void print_diagsums(int *a, int size)
 {
-	int i = 0, sum = 0;
+	int i = 0, sum = 0, next = 0;
 
-	while (i < size)
+	while (i < (size * size))
 	{
-		sum += *(a + i * (size + 1));
-		printf("1, %d\n", *(a + i * (size + 1)));
-		i++;
+		next = a[i];
+		sum += next;
+		i += size + 1;
 	}
-	printf("%d\n", sum);
+	printf("%d, ", sum);
 
+	i = size - 1;
 	sum = 0;
-	while (i > 0)
+	while (i < (size * size - 1))
 	{
-		sum += *(a + i * (size - 1));
-		printf("1, %d\n", *(a + i * (size + 1)));
-		i--;
+		next = a[i];
+		sum += next;
+		i += size - 1;
 	}
 	printf("%d\n", sum);
 }
