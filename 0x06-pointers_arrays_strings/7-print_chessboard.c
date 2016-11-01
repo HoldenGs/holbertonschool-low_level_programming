@@ -1,9 +1,9 @@
 #include "holberton.h"
 
 /**
- * print_chesboard - print a chessboard
+ * print_chessboard - print a chessboard
  *
- * @a: 2D array matrix to be printed
+ * @a[8]: 2D array matrix to be printed
  *
  * Return: void
  */
