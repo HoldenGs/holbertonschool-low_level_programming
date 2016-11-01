@@ -15,12 +15,10 @@ char *_strstr(char *haystack, char *needle)
 	while (needle[ncount])
 		ncount++;
 
-
-
 	for (i = 0; haystack[i]; i++)
 	{
 		j = i;
-		while (needle[flag] == haystack[j] && needle[flag] && haystack[i])
+		while (needle[flag] == haystack[j] && needle[flag] && haystack[j])
 		{
 			j++;
 			flag++;
@@ -29,5 +27,6 @@ char *_strstr(char *haystack, char *needle)
 		if (flag == ncount)
 			return (haystack + i);
 	}
+
 	return (0);
 }
