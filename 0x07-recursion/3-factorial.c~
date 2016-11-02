@@ -1,0 +1,8 @@
+#include "holberton.h"
+
+/**
+ * factorial - return the factorial of number @n
+ *
+ * @n: n to begin factorial calculation
+ *
+ * Return:
