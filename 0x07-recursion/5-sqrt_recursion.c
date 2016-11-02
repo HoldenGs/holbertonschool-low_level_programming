@@ -1,6 +1,5 @@
 #include "holberton.h"
 
-int recurse_root(int n, int prev);
 /**
  * _sqrt_recursion - return the natural square root of a number
  *
@@ -10,9 +9,9 @@ int recurse_root(int n, int prev);
  */
 int _sqrt_recursion(int n)
 {
-	if (n <= 0)
-		return (-1);
-	return (recurse_root(n, 1));
+        if (n <= 0)
+                return (-1);
+        return (recurse_root(n, 1));
 }
 
 /**
@@ -25,9 +24,9 @@ int _sqrt_recursion(int n)
  */
 int recurse_root(int n, int prev)
 {
-	if (n - prev * prev == 0)
-		return (prev);
-	if (n - prev * prev < 0)
-		return (-1);
-	return (recurse_root(n, prev + 1));
+        if (n - prev * prev == 0)
+                return (prev);
+        if (n - prev * prev < 0)
+                return (-1);
+        return (recurse_root(n, prev + 1));
 }
