@@ -4,7 +4,7 @@
  * _pow_recursion - return the value of @x raise to the power of @y
  *
  * @x: integer base
- * @u: integer exponent
+ * @y: integer exponent
  *
  * Return: 0
  */
