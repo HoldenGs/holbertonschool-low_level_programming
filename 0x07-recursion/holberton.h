@@ -9,3 +9,4 @@ int recurse_root(int n, int prev);
 int is_prime_number(int n);
 int is_prime_helper(int n, int check);
 int is_palindrome(char *s);
+int palindrome_helper(char *s, int end, int beginning);
