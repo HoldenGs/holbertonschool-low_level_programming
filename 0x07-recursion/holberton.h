@@ -12,3 +12,4 @@ int is_palindrome(char *s);
 int palindrome_helper(char *s, int end, int beginning);
 int wildcmp(char *s1, char *s2);
 int cmp_helper(char *s1, char *s2, int s1length, int s2length);
+char *gotolast(char *s, char c, int length);

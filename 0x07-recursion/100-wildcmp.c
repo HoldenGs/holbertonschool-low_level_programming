@@ -1,4 +1,5 @@
 #include "holberton.h"
+#include <stdio.h>
 
 /**
  * wildcmp - compares two different strings, returning 1 if they are identical
@@ -31,19 +32,35 @@ int wildcmp(char *s1, char *s2)
 int cmp_helper(char *s1, char *s2, int s1length, int s2length)
 {
 	if (*s2 == '*' && *(s2 + 1) == '\0')
+	{
 		return (1);
-	else if (*s2 == '*')
-		return (cmp_helper(s1, s2 + 1, s1length, s2length - 1));
-        else if (*(s2 - 1) == '*' && s1length > s2length)
-                return (cmp_helper(s1 + 1, s2, s1length - 1, s2length));
-
-	else if (*s1 != *s2)
+	}
+	else if (*s1 == '\0' && *s2 != '\0')
+	{
 		return (0);
+	}
+	else if (*s2 == '*')
+	{
+		return (cmp_helper(s1, s2 + 1, s1length, s2length - 1));
+	}
+        else if (*(s2 - 1) == '*')
+	{
+		s1 = gotolast(s1, *s2, s1length);
+		s1length = _strlen_recursion(s1);
+                return (cmp_helper(s1 + 1, s2 + 1, s1length - 1, s2length - 1));
+	}
+	else if (*s1 != *s2)
+	{
+		return (0);
+	}
 	else if (*s1 == '\0' && *s2 == '\0')
+	{
 		return (1);
-
+	}
 	else
+	{
 		return (cmp_helper(s1 + 1, s2 + 1, s1length - 1, s2length - 1));
+	}
 }
 
 /**
@@ -61,4 +78,20 @@ int _strlen_recursion(char *s)
 	if (*s == 0)
 		return (0);
 	return ((length + 1) + _strlen_recursion(s + 1));
+}
+
+/**
+ * gotolast - return a pointer to the last instance of @c in string @s
+ *
+ * @s: string to search
+ * @c: character to search for
+ * @length: length of string @s
+ *
+ * Return: pointer to last @c in @s
+ */
+char *gotolast(char *s, char c, int length)
+{
+	if (*(s + length) == c)
+		return (s + length);
+	return (gotolast(s, c, length - 1));
 }
