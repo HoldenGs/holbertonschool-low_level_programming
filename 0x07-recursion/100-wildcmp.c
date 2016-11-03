@@ -43,11 +43,11 @@ int cmp_helper(char *s1, char *s2, int s1length, int s2length)
 	{
 		return (cmp_helper(s1, s2 + 1, s1length, s2length - 1));
 	}
-        else if (*(s2 - 1) == '*')
+	else if (*(s2 - 1) == '*')
 	{
 		s1 = gotolast(s1, *s2, s1length);
 		s1length = _strlen_recursion(s1);
-                return (cmp_helper(s1 + 1, s2 + 1, s1length - 1, s2length - 1));
+		return (cmp_helper(s1 + 1, s2 + 1, s1length - 1, s2length - 1));
 	}
 	else if (*s1 != *s2)
 	{
