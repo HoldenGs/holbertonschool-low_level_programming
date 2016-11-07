@@ -4,8 +4,8 @@
 /**
  * main - print out the name of the program
  *
- * argc: number of arguments
- * argv: array of pointers to program name
+ * @argc: number of arguments
+ * @argv: array of pointers to program name
  *
  * Return: 0
  */
