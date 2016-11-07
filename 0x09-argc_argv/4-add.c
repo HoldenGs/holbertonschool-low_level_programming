@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 		if (!num || num < 0)
 		{
 			printf("Error\n");
-			return (0);
+			return (1);
 		}
 		else
 			sum += num;
