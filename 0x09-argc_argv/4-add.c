@@ -16,15 +16,20 @@ int main(int argc, char *argv[])
 	sum = 0;
 	for (count = 1; count < argc; count++)
 	{
-		num = atoi(argv[count]);
-		if (!atoi(argv[count]) || num < 0)
+		num = 0;
+		while (*argv[count] != '\0')
 		{
-			printf("Error\n");
-			return (1);
+			if (*argv[count] >= '0' && *argv[count] <= '9')
+				num = num * 10 + *argv[count] - '0';
+			else
+			{
+				printf("Error\n");
+				return (1);
+			}
+			argv[count]++;
 		}
-		else
-			sum += num;
+		sum += num;
 	}
-	printf("%i\n", sum);
+	printf("%d\n", sum);
 	return (0);
 }
