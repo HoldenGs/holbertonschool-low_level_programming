@@ -14,15 +14,16 @@ int main(int argc, char *argv[])
 {
 	int answer;
 
-	answer = atoi(argv[1]) * atoi(argv[2]);
+
 	if (argc == 3)
 	{
+		answer = atoi(argv[1]) * atoi(argv[2]);
 		printf("%d\n", answer);
 		return (0);
 	}
 	else
 	{
-		printf("Error");
+		printf("Error\n");
 		return (1);
 	}
 }
