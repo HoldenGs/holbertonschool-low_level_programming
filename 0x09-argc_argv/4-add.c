@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 	for (count = 1; count < argc; count++)
 	{
 		num = atoi(argv[count]);
-		if (!num || num < 0)
+		if (!atoi(argv[count]) || num < 0)
 		{
 			printf("Error\n");
 			return (1);
