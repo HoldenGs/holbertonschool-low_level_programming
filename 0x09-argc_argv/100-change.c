@@ -31,6 +31,9 @@ int main(int argc, char *argv[])
 	if (num / 5 > 0)
 		sum += num / 5;
 	num %= 5;
+	if (num / 2 > 0)
+		sum += num / 2;
+	num %= 2;
 	if (num / 1 > 0)
 		sum += num / 1;
 
