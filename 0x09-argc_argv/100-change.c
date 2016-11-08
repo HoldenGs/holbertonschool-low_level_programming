@@ -23,28 +23,16 @@ int main(int argc, char *argv[])
 	num = atoi(argv[1]);
 
 	if (num / 25 > 0)
-	{
-		tmpnum = num / 25;
-		sum += tmpnum;
-		num -= tmpnum * 25;
-	}
+		sum += num / 25;
+	num %= 25;
 	if (num / 10 > 0)
-	{
-		tmpnum = num / 10;
-		sum += tmpnum;
-		num -= tmpnum * 10;
-	}
+		sum += num / 10;
+	num %= 10;
 	if (num / 5 > 0)
-	{
-		tmpnum = num / 5;
-		sum += tmpnum;
-		num -= tmpnum * 5;
-	}
+		sum += num / 5;
+	num %= 5;
 	if (num / 1 > 0)
-	{
-		tmpnum = num / 1;
-		sum += tmpnum;
-	}
+		sum += num / 1;
 
 	printf("%d\n", sum);
 	return (0);
