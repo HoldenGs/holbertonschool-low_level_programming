@@ -19,7 +19,7 @@ int _strlen(char *str)
 }
 
 /**
- * strdup - return a pointer to a duplicate string of @str
+ * _strdup - return a pointer to a duplicate string of @str
  *
  * @str: string to duplicate
  *
