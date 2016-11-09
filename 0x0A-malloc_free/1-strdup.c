@@ -30,10 +30,10 @@ char *_strdup(char *str)
 	char *a;
 	int i, size;
 
-	size = _strlen(str);
 
-	if (size == 0)
+	if (str == NULL)
 		return (NULL);
+	size = _strlen(str);
 
 	a = malloc((size + 1) * sizeof(char));
 
@@ -44,5 +44,6 @@ char *_strdup(char *str)
 	{
 		a[i] = str[i];
 	}
+	a[i] = str[i];
 	return (a);
 }
