@@ -15,7 +15,10 @@ int _strlen(char *str)
 
 	i = 0;
 	while (*str != '\0')
+	{
+		str++;
 		i++;
+	}
 	return (i);
 }
 
@@ -30,9 +33,15 @@ int _strlen(char *str)
 char *str_concat(char *s1, char *s2)
 {
 	char *a;
-	int i;
+	int i, s1length, s2length;
 
-	a = malloc(sizeof(*s1) + sizeof(*s2));
+	s1length = _strlen(s1);
+	s2length = _strlen(s2);
+
+	if (s1length == 0 && s2length == 0)
+		return (NULL);
+
+	a = malloc(s1length + s2length + 1);
 
 	if (a == NULL)
 		return (NULL);
@@ -50,6 +59,7 @@ char *str_concat(char *s1, char *s2)
 		i++;
 		s2++;
 	}
+	a[i] = '\0';
 
 	return (a);
 }
