@@ -12,7 +12,7 @@
  */
 char *argstostr(int ac, char **av)
 {
-	char *a;
+	char *a, *retp;
 	int i, j, size, strcount;
 
 	if (ac == 0 || av == NULL)
@@ -31,6 +31,7 @@ char *argstostr(int ac, char **av)
 		return (NULL);
 
 	strcount = 0;
+	retp = a;
 	for (i = 0; i < ac; i++)
 	{
 		for (j = 0; *(*(av + i) + j) != '\0'; j++)
@@ -43,5 +44,5 @@ char *argstostr(int ac, char **av)
 	}
 	*(a + strcount) = '\0';
 
-	return (a);
+	return (retp);
 }
