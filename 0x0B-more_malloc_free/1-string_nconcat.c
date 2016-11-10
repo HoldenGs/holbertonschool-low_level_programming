@@ -11,11 +11,11 @@
  */
 int _strlen(char *str)
 {
-        int i;
+	int i;
 
-        for (i = 0; str[i] != '\0'; i++)
-                ;
-        return (i);
+	for (i = 0; str[i] != '\0'; i++)
+		;
+	return (i);
 }
 
 /**
@@ -34,6 +34,11 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 
 	length1 = _strlen(s1);
 	length2 = _strlen(s2);
+
+	if (s1 == NULL)
+		s1 = "";
+	if (s2 == NULL)
+		s2 = "";
 
 	if (length2 <= n)
 		n = length2;
