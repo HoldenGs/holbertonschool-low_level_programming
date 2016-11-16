@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 /**
  * int_index - search for an integer in an array using @cmp
  * @array: array
