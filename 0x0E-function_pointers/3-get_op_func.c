@@ -2,8 +2,8 @@
 #include <stdio.h>
 
 /**
- * get_op_func - perform the operation matching @s
- * @s: character denoting operation
+ * get_op_func - perform the operation matching
+ * @s: some symbol
  *
  * Return: pointer to corresponding function; otherwise NULL
  */

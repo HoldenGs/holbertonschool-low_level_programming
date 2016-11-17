@@ -4,6 +4,8 @@
 
 /**
  * main - check the code for Holberton School students
+ * @argc: number of arguments
+ * @argv: pointer array of arguments
  *
  * Return: 0
  */
