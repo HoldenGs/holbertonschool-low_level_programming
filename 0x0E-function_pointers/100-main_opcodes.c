@@ -11,16 +11,16 @@
 int main(int argc, char *argv[])
 {
 	int i, n;
-	int (*p)(int, char*);
+	unsigned char *p;
 
-	p = main;
+	p = (unsigned char *)main;
 	if (argc != 2)
 	{
 		printf("Error\n");
 		exit(1);
 	}
 	n = atoi(argv[1]);
-	if (n > 0)
+	if (n < 0)
 	{
 		printf("Error\n");
 		exit(2);
@@ -29,10 +29,9 @@ int main(int argc, char *argv[])
 	for (i = 0; i < n; i++)
 	{
 		if ((i + 1) < n)
-			printf("%x ", *p + i);
+			printf("%02x ", *(p + i));
 		else
-			printf("%x\n", *p + i);
-
+			printf("%02x\n", *(p + i));
 	}
 	return (0);
 }
