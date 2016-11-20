@@ -10,7 +10,7 @@
  */
 void print_all(const char * const format, ...)
 {
-	int i, done;
+	int i;
 	char *s;
 	va_list list;
 
