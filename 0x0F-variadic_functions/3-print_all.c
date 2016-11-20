@@ -10,7 +10,7 @@
  */
 void print_all(const char * const format, ...)
 {
-	int i;
+	int i, done;
 	char *s;
 	va_list list;
 
@@ -46,5 +46,6 @@ void print_all(const char * const format, ...)
 			i++;
 		}
 		putchar('\n');
+		break;
 	}
 }
