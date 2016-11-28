@@ -1,0 +1,1 @@
+This project goes over the basic usage of linked lists.
