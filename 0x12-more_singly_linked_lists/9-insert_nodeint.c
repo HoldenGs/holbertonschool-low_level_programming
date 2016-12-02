@@ -20,7 +20,7 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int index, int n)
 		new = malloc(sizeof(listint_t));
 		new->n = n;
 		new->next = current;
-		current = new;
+		*head = new;
 		return (new);
 	}
 	while (i < index)
