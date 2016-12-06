@@ -8,24 +8,23 @@
  */
 void print_binary(unsigned long int n)
 {
-	unsigned long int multiplier;
-	int i;
+	int bitshift;
+	unsigned long int tmp;
+	char c, flag;
 
-	multiplier = i = 1;
-	while (multiplier <= n && i < 64)
+	flag = 0;
+	bitshift = sizeof(unsigned long int) * 8 - 1;
+	while (bitshift >= 0)
 	{
-		i++;
-		multiplier <<= 1;
+		tmp = n >> bitshift;
+		c = tmp & 1;
+		if (flag == 1 && c == 0)
+			_putchar ('0');
+		else if (c == 1)
+		{
+			flag = 1;
+			_putchar ('1');
+		}
+		bitshift--;
 	}
-	multiplier >>= 1;
-	while (multiplier > 0)
-	{
-		if (multiplier & n)
-			_putchar('1');
-		else
-			_putchar('0');
-		multiplier >>= 1;
-	}
-	if (n == 0)
-		_putchar('0');
 }
