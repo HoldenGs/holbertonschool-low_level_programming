@@ -9,10 +9,14 @@
 void print_binary(unsigned long int n)
 {
 	unsigned long int multiplier;
+	int i;
 
-	multiplier = 1;
-	while (multiplier <= n)
+	multiplier = i = 1;
+	while (multiplier <= n && i < 64)
+	{
+		i++;
 		multiplier <<= 1;
+	}
 	multiplier >>= 1;
 	while (multiplier > 0)
 	{
