@@ -9,12 +9,11 @@
  */
 int get_bit(unsigned long int n, unsigned int index)
 {
-	unsigned long int compare, i;
+	unsigned long int compare;
 
 	compare = 1;
-	for (i = 0; i < index; i++)
-		compare *= 2;
-	if (n < compare)
+	compare <<= index;
+	if (compare > n)
 		return (-1);
 	if (n & compare)
 		return (1);
