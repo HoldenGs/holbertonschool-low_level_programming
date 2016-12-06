@@ -27,4 +27,6 @@ void print_binary(unsigned long int n)
 		}
 		bitshift--;
 	}
+	if (n == 0)
+		_putchar('0');
 }
