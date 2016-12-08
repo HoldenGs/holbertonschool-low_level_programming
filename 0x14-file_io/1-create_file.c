@@ -14,6 +14,11 @@ int create_file(const char *filename, char *text_content)
 	if (filename == NULL)
 		return (-1);
 	fd = open(filename, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR);
+	if (fd == -1)
+	{
+		close(fd);
+		return (-1);
+	}
 	if (text_content != NULL)
 	{
 		for (i = 0; text_content[i] != 0; i++)
