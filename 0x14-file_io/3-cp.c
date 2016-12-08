@@ -1,7 +1,7 @@
 #include "holberton.h"
 
 /**
- * maincp - copy a file from one name to another
+ * main - copy a file from one name to another
  * @ac: number of arguments
  * @av: pointer to arguments
  *
@@ -21,14 +21,18 @@ int main(int ac, char **av)
 	fdw = open(av[2], O_CREAT | O_WRONLY | O_TRUNC, mode);
 	if (fdw == -1)
 		dprintf(fdr, "Error: Can't write to %s\n", av[2]), exit(99);
+	rlength = wlength = 1;
 	while (rlength)
 	{
 		rlength = read(fdr, buf, BUFFERSIZE);
 		if (rlength == -1)
 			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", av[1]), exit(98);
-		wlength = write(fdw, buf, rlength);
-		if (wlength == -1)
-			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]), exit(99);
+		if (rlength > 0)
+		{
+			wlength = write(fdw, buf, rlength);
+			if (wlength == -1)
+				dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]), exit(99);
+		}
 	}
 	rclose = close(fdr);
 	if (rclose == -1)
