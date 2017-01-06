@@ -1,5 +1,13 @@
 #include "lists.h"
 
+/**
+ * add_dnodeint_end - add a node to the end of a doubly linked list
+ *
+ * @head: list head
+ * @n: integer data
+ *
+ * Return: new node; NULL if failure
+ */
 dlistint_t *add_dnodeint_end(dlistint_t **head, const int n)
 {
 	dlistint_t *new, *walk;
