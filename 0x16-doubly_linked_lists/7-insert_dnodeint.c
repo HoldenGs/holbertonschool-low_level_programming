@@ -10,7 +10,8 @@
  *
  * Return: new node; NULL if failure
  */
-dlistint_t *insert_dnodeint_at_idx(dlistint_t **head, unsigned int idx, int n)
+dlistint_t *insert_dnodeint_at_index(dlistint_t **head, unsigned int idx,
+				   int n)
 {
 	dlistint_t *new, *walk;
 	unsigned int i;
