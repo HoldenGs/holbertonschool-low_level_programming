@@ -10,14 +10,14 @@
  *
  * Return: new node; NULL if failure
  */
-dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
+dlistint_t *insert_dnodeint_at_idx(dlistint_t **head, unsigned int idx, int n)
 {
 	dlistint_t *new, *walk;
 	unsigned int i;
 
 	if (*h != NULL)
 	{
-		walk = *h;
+		walk = *head;
 		for (i = 0; walk != NULL; i++)
 		{
 			if (i == idx)
@@ -34,7 +34,7 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 					walk->next = new;
 				}
 				else
-					*h = new;
+					*head = new;
 				walk = new->next;
 				walk->prev = new;
 				return (new);
@@ -42,7 +42,7 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 			walk = walk->next;
 		}
 		if (i == idx)
-			add_dnodeint_end(h, n);
+			add_dnodeint_end(head, n);
 	}
 	return (NULL);
 }
