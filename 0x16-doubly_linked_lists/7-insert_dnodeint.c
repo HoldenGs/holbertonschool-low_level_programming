@@ -1,7 +1,8 @@
 #include "lists.h"
 
 /**
- * insert_dnodeint_at_idx - insert a new node in a doubly linked list at @index
+ * insert_dnodeint_at_index - insert a new node in a doubly linked list
+ * at @index
  *
  * @head: list head
  * @idx: position in list
@@ -15,10 +16,6 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **head, unsigned int idx,
 	dlistint_t *new, *walk;
 	unsigned int i;
 
-	new = malloc(sizeof(dlistint_t));
-	if (new == NULL)
-		return (NULL);
-	new->n = n;
 	if (*head != NULL)
 	{
 		walk = *head;
@@ -26,6 +23,10 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **head, unsigned int idx,
 		{
 			if (i == idx)
 			{
+				new = malloc(sizeof(dlistint_t));
+				if (new == NULL)
+					return (NULL);
+				new->n = n;
 				new->next = walk;
 				new->prev = walk->prev;
 				if (walk->prev != NULL)
@@ -42,6 +43,5 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **head, unsigned int idx,
 			walk = walk->next;
 		}
 	}
-	free(new);
 	return (NULL);
 }
