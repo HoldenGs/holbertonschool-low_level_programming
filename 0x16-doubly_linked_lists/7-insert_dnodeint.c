@@ -19,6 +19,7 @@ dlistint_t *insert_dnodeint_at_idx(dlistint_t **head, unsigned int idx, int n)
 		return (NULL);
 	new->n = n;
 	if (*head != NULL)
+	{
 		walk = *head;
 		for (i = 0; walk != NULL; i++)
 		{
@@ -39,5 +40,7 @@ dlistint_t *insert_dnodeint_at_idx(dlistint_t **head, unsigned int idx, int n)
 			}
 			walk = walk->next;
 		}
+	}
+	free(new);
 	return (NULL);
 }
