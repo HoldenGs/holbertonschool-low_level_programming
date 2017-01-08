@@ -20,7 +20,6 @@ int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 		{
 			if (i == index)
 			{
-				printf("Deleting Node...\n");
 				tmp = walker;
 				if (tmp->prev != NULL)
 				{
