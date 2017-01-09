@@ -3,7 +3,7 @@
 /**
  * insert_dnodeint_at_index - insert a new node in a doubly linked list
  *
- * @head: list head
+ * @h: list head
  * @idx: position in list
  * @n: node data
  *
