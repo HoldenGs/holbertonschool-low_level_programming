@@ -2,7 +2,6 @@
 
 /**
  * insert_dnodeint_at_index - insert a new node in a doubly linked list
- * at @index
  *
  * @head: list head
  * @idx: position in list
@@ -15,7 +14,7 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 	dlistint_t *new, *walk;
 	unsigned int i;
 
-	if (*head != NULL)
+	if (*h != NULL)
 	{
 		walk = *h;
 		for (i = 0; walk != NULL; i++)
@@ -41,8 +40,8 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 			}
 			walk = walk->next;
 		}
-		if (i == idx)
-			add_dnodeint_end(h, n);
 	}
+	if (i == idx)
+		add_dnodeint_end(h, n);
 	return (NULL);
 }
