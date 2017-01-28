@@ -53,13 +53,8 @@ int interpreter(char *file)
 		{
 			if (strcmp("push", code) == 0)
 			{
-				numstr = strtok(NULL, " \t");
-				if (numstr == NULL)
-				{
-					printf("%d: usage: push integer\n", line_number);
-					exit(EXIT_FAILURE);
-				}
-				number = atoi(numstr);
+				numstr = strtok(NULL, " \t\n");
+				number = push_checker(numstr, line_number);
 			}
 			execute(&head, line_number, code, number);
 		}

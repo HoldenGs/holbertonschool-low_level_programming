@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include <string.h>
 #include <sys/types.h>
 #include <fcntl.h>
@@ -40,6 +41,7 @@ typedef struct instruction_s
 /* Main Functions */
 int interpreter(char *file);
 int execute(stack_t **head, unsigned int line_number, char *code, int number);
+int push_checker(char *numstr, unsigned int line_number);
 void *smart_alloc(size_t size);
 void free_list(stack_t *head);
 
