@@ -44,7 +44,7 @@ void *smart_alloc(size_t size);
 void free_list(stack_t *head);
 
 /* Opcode Functions */
-void push_op(stack_t **head, int n, unsigned int line_number);
+void push_op(stack_t **head, int n);
 void pop_op(stack_t **head, unsigned int line_number);
 void pall_op(stack_t **head, unsigned int line_number);
 void pint_op(stack_t **head, unsigned int line_number);

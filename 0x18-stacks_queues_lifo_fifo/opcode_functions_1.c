@@ -8,11 +8,10 @@
  *
  * Return: 0
  */
-void push_op(stack_t **head, int n, unsigned int line_number)
+void push_op(stack_t **head, int n)
 {
 	stack_t *new;
 
-	(void)line_number;
 	new = smart_alloc(sizeof(stack_t));
 	new->n = n;
 	new->next = *head;

@@ -28,15 +28,15 @@ int main(int ac, char **av)
  */
 int interpreter(char *file)
 {
+	int number;
 	size_t size;
 	unsigned int line_number;
-	int number;
-	char *buffer, *code;
+	char *buffer, *code, *numstr;
 	stack_t *head;
 	FILE *fp;
 
 
-	number = size = line_number = 0;
+	size = line_number = 0;
 	head = NULL;
 	buffer = NULL;
 	fp = fopen(file, "r");
@@ -49,9 +49,20 @@ int interpreter(char *file)
 	{
 		line_number++;
 		code = strtok(buffer, " \t\n");
-		if (strcmp("push", code) == 0)
-			number = atoi(strtok(NULL, " \t"));
-		execute(&head, line_number, code, number);
+		if (code != NULL)
+		{
+			if (strcmp("push", code) == 0)
+			{
+				numstr = strtok(NULL, " \t");
+				if (numstr == NULL)
+				{
+					printf("%d: usage: push integer\n", line_number);
+					exit(EXIT_FAILURE);
+				}
+				number = atoi(numstr);
+			}
+			execute(&head, line_number, code, number);
+		}
 	}
 	free_list(head);
 	free(buffer);

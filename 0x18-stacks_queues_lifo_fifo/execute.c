@@ -29,7 +29,7 @@ int execute(stack_t **head, unsigned int line_number, char *code, int number)
 			return (0);
 	if (strcmp(code, "push") == 0)
 	{
-		push_op(head, number, line_number);
+		push_op(head, number);
 		return (0);
 	}
 	else
