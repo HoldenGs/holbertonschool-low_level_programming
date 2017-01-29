@@ -38,7 +38,7 @@ int interpreter(char *file)
 
 	size = line_number = 0;
 	head = NULL;
-	buffer = NULL;
+	buffer = smart_alloc(sizeof(SSIZE_MAX));
 	fp = fopen(file, "r");
 	if (fp == NULL)
 	{
@@ -61,5 +61,6 @@ int interpreter(char *file)
 	}
 	free_list(head);
 	free(buffer);
+	head = NULL;
 	return (0);
 }
