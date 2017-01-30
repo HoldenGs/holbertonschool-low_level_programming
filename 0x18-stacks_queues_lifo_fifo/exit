@@ -1,0 +1,398 @@
+[1mdiff --cc code.m[m
+[1mindex 7bd3649,44a59df..0000000[m
+[1m--- a/code.m[m
+[1m+++ b/code.m[m
+[36m@@@ -1,3 -1,3 +1,9 @@@[m
+[32m++<<<<<<< HEAD[m
+[32m +push 3[m
+[32m +sub[m
+[32m +pall[m
+[32m++=======[m
+[32m+ push 2[m
+[32m+ push 0[m
+[32m+ div[m
+[32m++>>>>>>> 9a7a50956454f4fdb1d9a65054cb3e6329b1dbdb[m
+[1mdiff --cc execute.c[m
+[1mindex 201a2f0,ebd8eb2..0000000[m
+[1m--- a/execute.c[m
+[1m+++ b/execute.c[m
+[36m@@@ -3,9 -3,9 +3,15 @@@[m
+  /**[m
+   * execute - execute the opcode's corresponding function[m
+   *[m
+[32m++<<<<<<< HEAD[m
+[32m + * @head: stack head[m
+[32m + * @line_number: line number of opcode[m
+[32m + * @code: opcode string[m
+[32m++=======[m
+[32m+  * @code: bytecode to execute[m
+[32m+  * @head: the list[m
+[32m+  * @line_number: line of access[m
+[32m++>>>>>>> 9a7a50956454f4fdb1d9a65054cb3e6329b1dbdb[m
+   * @number: number to push if opcode is push[m
+   *[m
+   * Return: void[m
+[1mdiff --cc opcode_functions_2.c[m
+[1mindex 012307b,2ceb91d..0000000[m
+[1m--- a/opcode_functions_2.c[m
+[1m+++ b/opcode_functions_2.c[m
+[36m@@@ -69,30 -70,30 +69,56 @@@[m [mvoid sub_op(stack_t **head, unsigned in[m
+  		exit(EXIT_FAILURE);[m
+  	}[m
+  }[m
+[32m++<<<<<<< HEAD[m
+[32m +[m
+[32m +/**[m
+[32m + * div_op - divide second top of stack by top of stack[m
+[32m + *[m
+[32m + * @head: top of stack[m
+[32m + * @line_number: line number of opcode[m
+[32m++=======[m
+[32m+ /**[m
+[32m+  * div_op - divide second top element by top element[m
+[32m+  *[m
+[32m+  * @head: the list[m
+[32m+  * @line_number: line of acces[m
+[32m++>>>>>>> 9a7a50956454f4fdb1d9a65054cb3e6329b1dbdb[m
+   *[m
+   * Return: void[m
+   */[m
+  void div_op(stack_t **head, unsigned int line_number)[m
+  {[m
+  	stack_t *temp;[m
+[32m++<<<<<<< HEAD[m
+[32m +[m
+[32m +	if (*head != NULL && (*head)->next != NULL)[m
+[32m +	{[m
+[32m +		temp = *head;[m
+[32m +		*head = (*head)->next;[m
+[32m +		(*head)->n = (*head)->n / temp->n;[m
+[32m +		(*head)->prev = NULL;[m
+[32m +		free(temp);[m
+[32m +	}[m
+[32m +	else[m
+[32m +	{[m
+[32m +		printf("L%d: can't sub, stack too short\n", line_number);[m
+[32m +		exit(EXIT_FAILURE);[m
+[32m +	}[m
+[32m++=======[m
+[32m+ 	int hold;[m
+[32m+ [m
+[32m+ 	if (*head == NULL || (*head)->next == NULL)[m
+[32m+ 	{[m
+[32m+ 		printf("L%d: can't div, stack too short\n", line_number);[m
+[32m+ 		exit(EXIT_FAILURE);[m
+[32m+ 	}[m
+[32m+ 	if ((*head)->n == 0)[m
+[32m+ 	{[m
+[32m+ 		printf("L%d: division by zero\n", line_number);[m
+[32m+ 		exit(EXIT_FAILURE);[m
+[32m+ 	}[m
+[32m+ 	temp = *head;[m
+[32m+ 	temp->next->n = temp->next->n / temp->n;[m
+[32m+ 	pop_op(head, line_number);[m
+[32m++>>>>>>> 9a7a50956454f4fdb1d9a65054cb3e6329b1dbdb[m
+  }[m
+[1mdiff --cc opcode_functions_3.c[m
+[1mindex 7af1ea9,0749958..0000000[m
+[1m--- a/opcode_functions_3.c[m
+[1m+++ b/opcode_functions_3.c[m
+[36m@@@ -1,95 -1,105 +1,199 @@@[m
+  #include "monty.h"[m
+[32m++<<<<<<< HEAD[m
+[32m +[m
+[32m +/**[m
+[32m + * mul_op - multiply the top of stack with the second top of stack[m
+[32m + *[m
+[32m + * @head: top of stack[m
+[32m + * @line_number: line number of opcode[m
+[32m + *[m
+[32m + * Return: void[m
+[32m++=======[m
+[32m+ /**[m
+[32m+  * mul_op - multiplies first and second to element of stack[m
+[32m+  *[m
+[32m+  * @head: the list[m
+[32m+  * @line_number: line of access[m
+[32m+  *[m
+[32m+  * Return: void[m
+[32m+  *[m
+[32m++>>>>>>> 9a7a50956454f4fdb1d9a65054cb3e6329b1dbdb[m
+   */[m
+  void mul_op(stack_t **head, unsigned int line_number)[m
+  {[m
+  	stack_t *temp;[m
+[32m++<<<<<<< HEAD[m
+[32m +[m
+[32m +	if (*head != NULL && (*head)->next != NULL)[m
+[32m +	{[m
+[32m +		temp = *head;[m
+[32m +		*head = (*head)->next;[m
+[32m +		(*head)->n = (*head)->n * temp->n;[m
+[32m +		(*head)->prev = NULL;[m
+[32m +		free(temp);[m
+[32m +	}[m
+[32m +	else[m
+[32m +	{[m
+[32m +		printf("L%d: can't sub, stack too short\n", line_number);[m
+[32m +		exit(EXIT_FAILURE);[m
+[32m +	}[m
+[32m +}[m
+[32m +[m
+[32m +/**[m
+[32m + * mod_op - find the remainder of top of stack divided by second top of stack[m
+[32m + *[m
+[32m + * @head: top of stack[m
+[32m + * @line_number: line number of opcode[m
+[32m + *[m
+[32m + * Return: void[m
+[32m++=======[m
+[32m+ [m
+[32m+ 	temp = *head;[m
+[32m+ 	if (*head == NULL || (*head)->next == NULL)[m
+[32m+ 	{[m
+[32m+ 		printf("L%d: can't mul, stack too short\n", line_number);[m
+[32m+ 		exit(EXIT_FAILURE);[m
+[32m+ 	}[m
+[32m+ 	(*head) = (*head)->next;[m
+[32m+ 	(*head)->n = (*head)->n * temp->n;[m
+[32m+ 	free(temp);[m
+[32m+ }[m
+[32m+ /**[m
+[32m+  * mod_op - computes rest of division of second top elements of stack[m
+[32m+  *[m
+[32m+  * @head: the list[m
+[32m+  * @line_number: line of access[m
+[32m+  *[m
+[32m+  * Return: void[m
+[32m+  *[m
+[32m++>>>>>>> 9a7a50956454f4fdb1d9a65054cb3e6329b1dbdb[m
+   */[m
+  void mod_op(stack_t **head, unsigned int line_number)[m
+  {[m
+  	stack_t *temp;[m
+[32m++<<<<<<< HEAD[m
+[32m +[m
+[32m +	if (*head != NULL && (*head)->next != NULL)[m
+[32m +	{[m
+[32m +		temp = *head;[m
+[32m +		*head = (*head)->next;[m
+[32m +		(*head)->n = (*head)->n % temp->n;[m
+[32m +		(*head)->prev = NULL;[m
+[32m +		free(temp);[m
+[32m +	}[m
+[32m +	else[m
+[32m +	{[m
+[32m +		printf("L%d: can't sub, stack too short\n", line_number);[m
+[32m +		exit(EXIT_FAILURE);[m
+[32m +	}[m
+[32m +}[m
+[32m +[m
+[32m +/**[m
+[32m + * pchar_op - print the character value of the top of stack[m
+[32m + *[m
+[32m + * @head: top of stack[m
+[32m + * @line_number: line number of opcode[m
+[32m + *[m
+[32m + * Return: void[m
+[32m + */[m
+[32m +void pchar_op(stack_t **head, unsigned int line_number)[m
+[32m +{[m
+[32m +	if (*head == NULL)[m
+[32m +	{[m
+[32m +		printf("L%d: can't pint, stack empty\n", line_number);[m
+[32m +		exit(EXIT_FAILURE);[m
+[32m +	}[m
+[32m +	printf("%c\n", (*head)->n);[m
+[32m +}[m
+[32m +[m
+[32m +/**[m
+[32m + * pstr_op - print the ASCII value of each integer in the stack[m
+[32m + *[m
+[32m + * @head: top of stack[m
+[32m + * @line_number: line number of opcode[m
+[32m + *[m
+[32m + * Return: void[m
+[32m + */[m
+[32m +void pstr_op(stack_t **head, unsigned int line_number)[m
+[32m +{[m
+[32m +	stack_t *node;[m
+[32m +	size_t i;[m
+[32m +[m
+[32m +	(void)line_number;[m
+[32m +	node = *head;[m
+[32m +	for (i = 0; node != NULL; i++)[m
+[32m +	{[m
+[32m +		printf("%c\n", node->n);[m
+[32m +		node = node->next;[m
+[32m +	}[m
+[32m++=======[m
+[32m+ [m
+[32m+ 	if (*head == NULL || (*head)->next == NULL)[m
+[32m+ 	{[m
+[32m+ 		printf("L%d: can't mod, stack too short\n", line_number);[m
+[32m+ 		exit(EXIT_FAILURE);[m
+[32m+ 	}[m
+[32m+ 	if ((*head)->n == 0)[m
+[32m+ 	{[m
+[32m+ 		printf("L%d: division by zero\n", line_number);[m
+[32m+ 		exit(EXIT_FAILURE);[m
+[32m+ 	}[m
+[32m+ 	temp = *head;[m
+[32m+ 	temp->next->n = temp->next->n % temp->n;[m
+[32m+ 	pop_op(head, line_number);[m
+[32m+ }[m
+[32m+ /**[m
+[32m+  * pchar_op - prints the char at the top of stack followed by new line[m
+[32m+  *[m
+[32m+  * @head: the list[m
+[32m+  * @line_number: line of access[m
+[32m+  *[m
+[32m+  * Return: void[m
+[32m+  *[m
+[32m+  */[m
+[32m+ void pchar_op(stack_t **head, unsigned int line_number)[m
+[32m+ {[m
+[32m+ 	char n;[m
+[32m+ [m
+[32m+ 	if (*head == NULL)[m
+[32m+ 	{[m
+[32m+ 		printf("L%d: can't pchar, stack empty\n", line_number);[m
+[32m+ 		exit(EXIT_FAILURE);[m
+[32m+ 	}[m
+[32m+ 	if (((*head)->n >= 97 && (*head)->n <= 122) ||[m
+[32m+ 	    ((*head)->n >= 65 && (*head)->n <= 90))[m
+[32m+ 	{[m
+[32m+ 		n = (*head)->n;[m
+[32m+ 		putchar(n);[m
+[32m+ 		putchar('\n');[m
+[32m+ 	}[m
+[32m+ 	else[m
+[32m+ 	{[m
+[32m+ 		printf("L%d: can't pchar, value out of range\n", line_number);[m
+[32m+ 		exit(EXIT_FAILURE);[m
+[32m+ 	}[m
+[32m+ }[m
+[32m+ /**[m
+[32m+  * pstr_op - print string starting at top of stack followed by new line[m
+[32m+  *[m
+[32m+  * @head: the list[m
+[32m+  * @line_number: line of access[m
+[32m+  *[m
+[32m+  * Return: void[m
+[32m+  *[m
+[32m+  */[m
+[32m+ void pstr_op(stack_t **head, unsigned int line_number)[m
+[32m+ {[m
+[32m+ 	char n;[m
+[32m+ 	(void) line_number;[m
+[32m+ [m
+[32m+ 	while (*head != NULL && (*head)->n >= 0 && (*head)->n <= 127[m
+[32m+ 	       && (*head)->n != 0)[m
+[32m+ 	{[m
+[32m+ 		n = (*head)->n;[m
+[32m+ 		putchar(n);[m
+[32m+ 		(*head) = (*head)->next;[m
+[32m+ 	}[m
+[32m+ 	putchar('\n');[m
+[32m++>>>>>>> 9a7a50956454f4fdb1d9a65054cb3e6329b1dbdb[m
+  }[m
+[1mdiff --cc opcode_functions_4.c[m
+[1mindex 64148c5,d472d01..0000000[m
+[1m--- a/opcode_functions_4.c[m
+[1m+++ b/opcode_functions_4.c[m
+[36m@@@ -10,45 -9,72 +10,73 @@@[m
+   */[m
+  void rotl_op(stack_t **head, unsigned int line_number)[m
+  {[m
+[31m- 	(void) head;[m
+[31m- 	(void) line_number;[m
+[32m+ 	stack_t *temp, *hold;[m
+[32m+ [m
+[32m+ 	temp = *head;[m
+[32m+ 	if (temp == NULL)[m
+[32m+ 		return;[m
+[32m+ 	while (temp->next != NULL)[m
+[32m+ 		temp = temp->next;[m
+[32m+ 	hold = malloc(sizeof(stack_t));[m
+[32m+ 	if (hold == NULL)[m
+[32m+ 		return;[m
+[32m+ 	hold->n = (*head)->n;[m
+[32m+ 	hold->next = NULL;[m
+[32m+ 	hold->prev = temp;[m
+[32m+ 	temp->next = hold;[m
+[32m+ 	pop_op(head, line_number);[m
+[31m -[m
+  }[m
+[32m +[m
+  /**[m
+[31m - * rotr_op - rotates stack to the bottom[m
+[32m + * rotr_op - rotate the stack right[m
+   *[m
+[31m - * @head: the list[m
+[31m - * @line_number: line of access[m
+[32m + * @head: top of stack[m
+[32m + * @line_number: line number of opcode[m
+   *[m
+   * Return: void[m
+[31m - *[m
+   */[m
+  void rotr_op(stack_t **head, unsigned int line_number)[m
+  {[m
+[31m- 	(void) head;[m
+[31m- 	(void) line_number;[m
+[32m+ 	stack_t *temp, *hold;[m
+[32m+ [m
+[32m+ 	temp = *head;[m
+[32m+ 	if (temp == NULL)[m
+[32m+ 		return;[m
+[32m+ 	while (temp->next != NULL)[m
+[32m+ 		temp = temp->next;[m
+[32m+ 	hold = malloc(sizeof(stack_t));[m
+[32m+ 	if (hold == NULL)[m
+[32m+ 		return;[m
+[32m+ 	hold->n = temp->n;[m
+[32m+ 	hold->next = (*head);[m
+[32m+ 	hold->prev = NULL;[m
+[32m+ 	(*head) = hold;[m
+[32m+ 	free(temp);[m
+  }[m
+[32m +[m
+  /**[m
+[31m-  * stack_op - change the format of the data to stack[m
+[32m+  * stack_op - sets the format of stack to LIFO[m
+   *[m
+[31m-  * @head: top of stack[m
+[31m-  * @line_number: line number of opcode[m
+[32m+  * @head: the list[m
+[32m+  * @line_number: line of access[m
+   *[m
+   * Return: void[m
+[32m+  *[m
+   */[m
+  void stack_op(stack_t **head, unsigned int line_number)[m
+  {[m
+  	(void) head;[m
+  	(void) line_number;[m
+  }[m
+[32m +[m
+  /**[m
+[31m-  * queue_op - change the format of the data to queue[m
+[32m+  * queue_op - sets format of stack to FIFO[m
+   *[m
+[31m-  * @head: top of stack[m
+[31m-  * @line_number: line number of opcode[m
+[32m+  * @head: the list[m
+[32m+  * @line_number: line of access[m
+   *[m
+   * Return: void[m
+[32m+  *[m
+   */[m
+  void queue_op(stack_t **head, unsigned int line_number)[m
+  {[m
+[1mdiff --git a/0X18.tests b/0X18.tests[m
+[1m--- a/0X18.tests[m
+[1m+++ b/0X18.tests[m
+[36m@@ -1 +1 @@[m
+[31m-Subproject commit 4727395d42addcb39c1d90c2c3bb65c70766ec95[m
+[32m+[m[32mSubproject commit 4727395d42addcb39c1d90c2c3bb65c70766ec95-dirty[m

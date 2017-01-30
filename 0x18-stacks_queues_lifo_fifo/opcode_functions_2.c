@@ -84,6 +84,11 @@ void div_op(stack_t **head, unsigned int line_number)
 
 	if (*head != NULL && (*head)->next != NULL)
 	{
+		if ((*head)->n == 0)
+		{
+			printf("L%d: division by zero\n", line_number);
+			exit(EXIT_FAILURE);
+		}
 		temp = *head;
 		*head = (*head)->next;
 		(*head)->n = (*head)->n / temp->n;

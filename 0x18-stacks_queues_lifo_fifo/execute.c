@@ -3,15 +3,16 @@
 /**
  * execute - execute the opcode's corresponding function
  *
- * @code: bytecode to execute
- *
+ * @head: stack head
+ * @line_number: line number of opcode
+ * @code: opcode string
  * @number: number to push if opcode is push
  *
  * Return: void
  */
 int execute(stack_t **head, unsigned int line_number, char *code, int number)
 {
-	int i;
+	int i, err;
 	instruction_t opcodes[] = {
 		{"pall", pall_op}, {"pint", pint_op},
 		{"pop", pop_op}, {"swap", swap_op},
@@ -29,8 +30,8 @@ int execute(stack_t **head, unsigned int line_number, char *code, int number)
 			return (0);
 	if (strcmp(code, "push") == 0)
 	{
-		push_op(head, number);
-		return (0);
+		err = push_op(head, number);
+		return (err);
 	}
 	else
 		(void) number;
@@ -39,9 +40,9 @@ int execute(stack_t **head, unsigned int line_number, char *code, int number)
 		if (strcmp(code, opcodes[i].opcode) == 0)
 		{
 			opcodes[i].f(head, line_number);
-			return (0);
+			exit(EXIT_FAILURE);
 		}
 	}
-	printf("%d: unknown instruction %s\n", line_number, code);
-	exit(EXIT_FAILURE);
+	printf("L%d: unknown instruction %s\n", line_number, code);
+	return (-1);
 }

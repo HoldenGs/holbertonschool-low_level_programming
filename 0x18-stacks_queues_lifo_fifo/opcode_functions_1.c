@@ -83,7 +83,6 @@ void pop_op(stack_t **head, unsigned int line_number)
 		printf("L%d: can't pop an empty stack\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-
 }
 /**
  * swap_op - swaps top two elements of doubly linked list
@@ -95,20 +94,22 @@ void pop_op(stack_t **head, unsigned int line_number)
  */
 void swap_op(stack_t **head, unsigned int line_number)
 {
-	stack_t *temp, *hold;
-	int holder;
+	stack_t *temp, *hold, *temp2;
+	int holder, i;
 
 	if (*head != NULL && (*head)->next != NULL)
 	{
-		temp = *head;
-		hold = temp->next;
-		holder = temp->n;
-		temp->n = hold->n;
-		hold->n = holder;
+		i++;
+		temp2 = temp2->next;
 	}
-	else
+	if (i < 2 || (*head)->next == NULL)
 	{
 		printf("L%d: can't swap, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
+	temp = *head;
+	hold = temp->next;
+	holder = temp->n;
+	temp->n = hold->n;
+	hold->n = holder;
 }
