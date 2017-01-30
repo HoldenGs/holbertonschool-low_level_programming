@@ -5,7 +5,6 @@
  *
  * @head: list head
  * @n: integer data
- * @line_number: the line of access
  *
  * Return: 0
  */
@@ -58,6 +57,7 @@ void pint_op(stack_t **head, unsigned int line_number)
 	}
 	printf("%d\n", (*head)->n);
 }
+
 /**
  * pop_op - removes top element of a doubly linked list
  *
@@ -75,6 +75,7 @@ void pop_op(stack_t **head, unsigned int line_number)
 	{
 		current = *head;
 		*head = (*head)->next;
+		(*head)->prev = NULL;
 		free(current);
 	}
 	else

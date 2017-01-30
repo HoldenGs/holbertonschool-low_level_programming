@@ -71,6 +71,14 @@ void sub_op(stack_t **head, unsigned int line_number)
 	}
 }
 
+/**
+ * div_op - divide top of stack by second top of stack
+ *
+ * @head: top of stack
+ * @line_number: line number of opcode
+ *
+ * Return: void
+ */
 void div_op(stack_t **head, unsigned int line_number)
 {
 	(void) head;

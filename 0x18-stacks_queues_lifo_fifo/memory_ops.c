@@ -9,15 +9,15 @@
  */
 void *smart_alloc(size_t size)
 {
-        void *ptr;
+	void *ptr;
 
-        ptr = malloc(size);
-        if (ptr == NULL)
-        {
-                printf("Error: Malloc failed\n");
-                exit(EXIT_FAILURE);
-        }
-        return (ptr);
+	ptr = malloc(size);
+	if (ptr == NULL)
+	{
+		printf("Error: Malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
+	return (ptr);
 }
 
 /**

@@ -10,13 +10,13 @@
  */
 int main(int ac, char **av)
 {
-        if (ac != 2)
-        {
-                printf("USAGE: monty file\n");
-                exit(EXIT_FAILURE);
-        }
-        interpreter(av[1]);
-        return (0);
+	if (ac != 2)
+	{
+		printf("USAGE: monty file\n");
+		exit(EXIT_FAILURE);
+	}
+	interpreter(av[1]);
+	return (0);
 }
 
 /**
@@ -28,7 +28,7 @@ int main(int ac, char **av)
  */
 int interpreter(char *file)
 {
-	int number;
+	int number, err;
 	size_t size;
 	unsigned int line_number;
 	char *buffer, *code, *numstr;
@@ -36,9 +36,9 @@ int interpreter(char *file)
 	FILE *fp;
 
 
-	size = line_number = 0;
+	size = line_number = err = 0;
 	head = NULL;
-	buffer = smart_alloc(sizeof(SSIZE_MAX));
+	buffer = NULL;
 	fp = fopen(file, "r");
 	if (fp == NULL)
 	{
@@ -61,6 +61,6 @@ int interpreter(char *file)
 	}
 	free_list(head);
 	free(buffer);
-	head = NULL;
+	fclose(fp);
 	return (0);
 }
