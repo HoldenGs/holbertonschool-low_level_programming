@@ -64,8 +64,12 @@ void mod_op(stack_t **head, unsigned int line_number)
  */
 void pchar_op(stack_t **head, unsigned int line_number)
 {
-	(void) head;
-	(void) line_number;
+	if (*head == NULL)
+	{
+		printf("L%d: can't pint, stack empty\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	printf("%c\n", (*head)->n);
 }
 
 /**
@@ -78,6 +82,14 @@ void pchar_op(stack_t **head, unsigned int line_number)
  */
 void pstr_op(stack_t **head, unsigned int line_number)
 {
-	(void) head;
-	(void) line_number;
+	stack_t *node;
+	size_t i;
+
+	(void)line_number;
+	node = *head;
+	for (i = 0; node != NULL; i++)
+	{
+		printf("%c\n", node->n);
+		node = node->next;
+	}
 }
