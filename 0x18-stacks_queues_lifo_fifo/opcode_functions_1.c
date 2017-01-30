@@ -94,22 +94,21 @@ void pop_op(stack_t **head, unsigned int line_number)
  */
 void swap_op(stack_t **head, unsigned int line_number)
 {
-	stack_t *temp, *hold, *temp2;
-	int holder, i;
+	stack_t *temp, *hold;
+	int holder;
 
 	if (*head != NULL && (*head)->next != NULL)
 	{
-		i++;
-		temp2 = temp2->next;
+		temp = *head;
+		hold = temp->next;
+		holder = temp->n;
+		temp->n = hold->n;
+		hold->n = holder;
 	}
-	if (i < 2 || (*head)->next == NULL)
+	else
 	{
 		printf("L%d: can't swap, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	temp = *head;
-	hold = temp->next;
-	holder = temp->n;
-	temp->n = hold->n;
-	hold->n = holder;
+
 }

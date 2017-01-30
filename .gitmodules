@@ -1,3 +1,6 @@
 [submodule "Monty"]
 	path = Monty
 	url = https://github.com/HoldenGs/Monty
+[submodule "monty"]
+	path = monty
+	url = https://github.com/HoldenGs/monty

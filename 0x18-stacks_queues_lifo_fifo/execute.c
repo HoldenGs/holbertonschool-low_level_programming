@@ -12,7 +12,7 @@
  */
 int execute(stack_t **head, unsigned int line_number, char *code, int number)
 {
-	int i, err;
+	int i;
 	instruction_t opcodes[] = {
 		{"pall", pall_op}, {"pint", pint_op},
 		{"pop", pop_op}, {"swap", swap_op},
@@ -30,8 +30,8 @@ int execute(stack_t **head, unsigned int line_number, char *code, int number)
 			return (0);
 	if (strcmp(code, "push") == 0)
 	{
-		err = push_op(head, number);
-		return (err);
+		push_op(head, number);
+		exit(EXIT_FAILURE);
 	}
 	else
 		(void) number;

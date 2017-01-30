@@ -51,7 +51,7 @@ void rotr_op(stack_t **head, unsigned int line_number)
 	hold->next = (*head);
 	hold->prev = NULL;
 	(*head) = hold;
-	free(temp);
+	pop_op(head, line_number);
 }
 
 /**
