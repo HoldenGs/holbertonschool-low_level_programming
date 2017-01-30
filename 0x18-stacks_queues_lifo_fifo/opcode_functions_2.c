@@ -55,7 +55,6 @@ void sub_op(stack_t **head, unsigned int line_number)
 {
 	stack_t *temp;
 
-
 	if (*head != NULL && (*head)->next != NULL)
 	{
 		temp = *head;
@@ -72,7 +71,7 @@ void sub_op(stack_t **head, unsigned int line_number)
 }
 
 /**
- * div_op - divide top of stack by second top of stack
+ * div_op - divide second top of stack by top of stack
  *
  * @head: top of stack
  * @line_number: line number of opcode
@@ -81,6 +80,19 @@ void sub_op(stack_t **head, unsigned int line_number)
  */
 void div_op(stack_t **head, unsigned int line_number)
 {
-	(void) head;
-	(void) line_number;
+	stack_t *temp;
+
+	if (*head != NULL && (*head)->next != NULL)
+	{
+		temp = *head;
+		*head = (*head)->next;
+		(*head)->n = (*head)->n / temp->n;
+		(*head)->prev = NULL;
+		free(temp);
+	}
+	else
+	{
+		printf("L%d: can't sub, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
 }
