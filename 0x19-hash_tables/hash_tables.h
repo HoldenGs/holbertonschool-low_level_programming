@@ -5,13 +5,12 @@
 #include <stdio.h>
 
 /**
- * hash_node_s - node of hash value to avoid collision
+ * struct hash_node_s - Node of a hash table
  *
- * @key : The key, string
- * @value : The value corresponding to a key
- * @next : A pointer to the next node of the list
- *
- * Description: This is a node to a value with each node being a unique key
+ * @key: The key, string
+ * The key is unique in the HashTable
+ * @value: The value corresponding to a key
+ * @next: A pointer to the next node of the List
  */
 typedef struct hash_node_s
 {
@@ -21,14 +20,12 @@ typedef struct hash_node_s
 } hash_node_t;
 
 /**
- * hash_table_s - hash table array structure
+ * struct hash_table_s - Hash table data structure
  *
  * @size: The size of the array
  * @array: An array of size @size
- *
- * Description: Each cell of this array is a pointer to the first node of a
- * linked list, because we want our HashTable to use a Chaining collision
- * handling
+ * Each cell of this array is a pointer to the first node of a linked list,
+ * because we want our HashTable to use a Chaining collision handling
  */
 typedef struct hash_table_s
 {
@@ -38,6 +35,5 @@ typedef struct hash_table_s
 
 /* Functions */
 hash_table_t *hash_table_create(unsigned long int size);
-hash_node_t *add_node(hash_node_t **head);
 
 #endif
