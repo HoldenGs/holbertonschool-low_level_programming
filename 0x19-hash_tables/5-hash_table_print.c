@@ -13,24 +13,26 @@ void hash_table_print(const hash_table_t *ht)
 	unsigned long int i;
 	int flag;
 
-	flag = 0;
-	putchar('{');
-	for (i = 0; i < ht->size; i++)
+	if (ht != NULL)
 	{
-		if (ht->array[i] != NULL)
+		flag = 0;
+		putchar('{');
+		for (i = 0; i < ht->size; i++)
 		{
-			current = ht->array[i];
-			while (current != NULL)
+			if (ht->array[i] != NULL)
 			{
-				if (flag != 0)
-					printf(", ");
-				printf("'%s': ", current->key);
-				printf("'%s'", current->value);
-
-				current = current->next;
-				flag = 1;
+				current = ht->array[i];
+				while (current != NULL)
+				{
+					if (flag != 0)
+						printf(", ");
+					printf("'%s': ", current->key);
+					printf("'%s'", current->value);
+					current = current->next;
+					flag = 1;
+				}
 			}
 		}
+		printf("}\n");
 	}
-	printf("}\n");
 }
