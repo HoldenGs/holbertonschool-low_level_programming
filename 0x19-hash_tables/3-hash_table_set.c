@@ -15,7 +15,6 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	unsigned long int index;
 
 	index = key_index((unsigned char *)key, ht->size);
-	/* make linked list node */
 	node = malloc(sizeof(hash_node_t));
 	if (node == NULL)
 		return (0);
