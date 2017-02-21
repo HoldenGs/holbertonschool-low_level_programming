@@ -1,7 +1,13 @@
 #include "sort.h"
 
 /**
+ * selection_sort - sort an array by swapping the minimum number until the end
  *
+ * @array: array to sort
+ *
+ * @size: size of the @array
+ *
+ * Return: void
  */
 void selection_sort(int *array, size_t size)
 {
