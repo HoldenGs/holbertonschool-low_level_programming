@@ -19,7 +19,7 @@ int binary_tree_balance(const binary_tree_t *tree)
 }
 
 /**
- * binary_tree_height - find the height of a binary tree
+ * balance_height - find the height of a binary tree
  *
  * @tree: tree whose height will be measured
  *
