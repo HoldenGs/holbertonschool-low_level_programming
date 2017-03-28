@@ -29,6 +29,7 @@ typedef struct binary_tree_s heap_t;
 
 /** Extra Functions **/
 int balance_height(const binary_tree_t *tree);
+int check_if_perfect(const binary_tree_t *tree);
 
 /** Functions **/
 void binary_tree_print(const binary_tree_t *);
