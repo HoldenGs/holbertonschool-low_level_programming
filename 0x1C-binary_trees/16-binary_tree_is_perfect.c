@@ -18,6 +18,10 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 
 /**
  * check_if_perfect - recurse through @tree to check for equal height
+ *
+ * @tree: tree to check
+ *
+ * Return: height of @tree if perfect tree, -1 if not perfect
  */
 int check_if_perfect(const binary_tree_t *tree)
 {
@@ -25,12 +29,9 @@ int check_if_perfect(const binary_tree_t *tree)
 
 	if (tree == NULL)
 		return (0);
+	lheight = check_if_perfect(tree->left);
+	if (lheight != -1 && check_if_perfect(tree->right) == lheight)
+		return (lheight + 1);
 	else
-	{
-		lheight = check_if_perfect(tree->left);
-		if (lheight != -1 && check_if_perfect(tree->right) == lheight)
-			return (lheight + 1);
-		else
-			return (-1);
-	}
+		return (-1);
 }
