@@ -1,4 +1,4 @@
-#include "../headers/demo_header.h"
+#include "../headers/demo_header.c"
 
 
 int main(void)
