@@ -1,0 +1,561 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"creat",
+				"createField"
+			],
+			[
+				"get",
+				"getElementById"
+			],
+			[
+				"Get",
+				"getElementById"
+			],
+			[
+				"t",
+				"tbody\tTag"
+			],
+			[
+				"th",
+				"thead\tTag"
+			],
+			[
+				"electron",
+				"electron-packager"
+			],
+			[
+				"webpack",
+				"webpack-dev-server"
+			],
+			[
+				"Com",
+				"ComponentB"
+			],
+			[
+				"fahr",
+				"fahrToCelcius"
+			],
+			[
+				"tile",
+				"tileset"
+			],
+			[
+				"tran",
+				"transition"
+			],
+			[
+				"padding",
+				"padding-top"
+			],
+			[
+				"reset",
+				"resetPlayer"
+			],
+			[
+				"overflow",
+				"overflow-y"
+			],
+			[
+				"over",
+				"overflow-y"
+			],
+			[
+				"mul",
+				"multiplier"
+			],
+			[
+				"block",
+				"block_description"
+			],
+			[
+				"put",
+				"put_to_bed"
+			],
+			[
+				"stuff",
+				"stuff_in_intestine"
+			],
+			[
+				"stuf",
+				"stuff_in_intestine"
+			],
+			[
+				"stuff_",
+				"stuff_in_intestine"
+			],
+			[
+				"time",
+				"time_passes"
+			],
+			[
+				"pick",
+				"pick_orange"
+			],
+			[
+				"beer",
+				"beer_number"
+			],
+			[
+				"en",
+				"english_number"
+			],
+			[
+				"write",
+				"write-1"
+			],
+			[
+				"num",
+				"num_words"
+			],
+			[
+				"las",
+				"last_name"
+			],
+			[
+				"mid",
+				"middle_name"
+			],
+			[
+				"fir",
+				"first_name"
+			],
+			[
+				"favorite",
+				"favorite_number"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"font",
+				"font-family"
+			],
+			[
+				"sket",
+				"sketchpad"
+			],
+			[
+				"sketch",
+				"sketchdiv"
+			],
+			[
+				"bac",
+				"background-color"
+			],
+			[
+				"sk",
+				"sketchDiv"
+			],
+			[
+				"flex",
+				"flex-grow"
+			],
+			[
+				"align",
+				"align-items"
+			],
+			[
+				"fle",
+				"flex-start"
+			],
+			[
+				"margin",
+				"margin-top"
+			],
+			[
+				"backg",
+				"background-image"
+			],
+			[
+				"in",
+				"inline-block"
+			],
+			[
+				"php",
+				"phpinfo"
+			],
+			[
+				"as",
+				"aspen-tree1"
+			],
+			[
+				"object",
+				"object-fit"
+			],
+			[
+				"fonts",
+				"font-size"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "demo_code.c",
+			"settings":
+			{
+				"buffer_size": 1526,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 249.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"package ",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"install",
+				"Colorsublime: Install Theme"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Disable Package"
+			],
+			[
+				"color",
+				"Colorsublime: Install Theme"
+			],
+			[
+				"align",
+				"Preferences: Alignment Key Bindings – Default"
+			]
+		],
+		"width": 470.0
+	},
+	"console":
+	{
+		"height": 372.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"ls",
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/holdengrissett/src/holbertonschool-low_level_programming/maze"
+	],
+	"file_history":
+	[
+		"/Users/holdengrissett/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Users/holdengrissett/src/holbertonschool-low_level_programming/maze/headers/demo_header.h",
+		"/Users/holdengrissett/src/holbertonschool-low_level_programming/maze/src/demo_code.c",
+		"/Users/holdengrissett/src/holbertonschool-low_level_programming/maze/src/init_instance.c",
+		"/Users/holdengrissett/src/holbertonschool-low_level_programming/maze/demo_code.c",
+		"/Users/holdengrissett/src/holbertonschool-low_level_programming/0x19-hash_tables/0-hash_table_create.c",
+		"/Users/holdengrissett/src/random_code/largest_sqrt_prime.py",
+		"/Users/holdengrissett/src/install_SDL2.sh",
+		"/Users/holdengrissett/src/random_code/coin_change.py",
+		"/Users/holdengrissett/Desktop/y-electron/index.css",
+		"/Users/holdengrissett/Desktop/y-electron/app.js",
+		"/Users/holdengrissett/Desktop/y-electron/index.js",
+		"/Users/holdengrissett/Desktop/y-electron/index.html",
+		"/Users/holdengrissett/Desktop/y-electron/package.json",
+		"/Users/holdengrissett/Desktop/y-electron/main.js",
+		"/Users/holdengrissett/Desktop/c-book-exercises/3-2.c",
+		"/Users/holdengrissett/Desktop/c-book-exercises/3-1.c",
+		"/Users/holdengrissett/Desktop/c-book-exercises/2-10.c",
+		"/Users/holdengrissett/Desktop/c-book-exercises/2-6.c",
+		"/Users/holdengrissett/Desktop/c-book-exercises/2-5.c",
+		"/Users/holdengrissett/Desktop/c-book-exercises/2-4.c",
+		"/Users/holdengrissett/Desktop/c-book-exercises/2-3.c",
+		"/Users/holdengrissett/Desktop/c-book-exercises/2-2.c",
+		"/Users/holdengrissett/Desktop/c-programs/2-2.c",
+		"/Users/holdengrissett/Desktop/c-programs/data-ranges.c",
+		"/Users/holdengrissett/Desktop/socialbeam/components/ComponentA.vue",
+		"/Users/holdengrissett/Desktop/socialbeam/components/ComponentB.vue",
+		"/Users/holdengrissett/Desktop/socialbeam/components/App.vue",
+		"/Users/holdengrissett/Desktop/socialbeam/main.js",
+		"/Users/holdengrissett/Desktop/socialbeam/webpack.config.js",
+		"/Users/holdengrissett/Desktop/socialbeam/package.json",
+		"/Users/holdengrissett/Desktop/socialbeam/index.html",
+		"/Users/holdengrissett/Desktop/socialbeam/entry.js",
+		"/Users/holdengrissett/Desktop/socialbeam/app.html",
+		"/Users/holdengrissett/Downloads/vue.js",
+		"/Applications/MAMP/htdocs/content.js",
+		"/Applications/MAMP/htdocs/entry.js",
+		"/Applications/MAMP/htdocs/index.html",
+		"/Applications/MAMP/htdocs/style.css",
+		"/Applications/MAMP/htdocs/webpack.config.js",
+		"/Applications/MAMP/htdocs/styles.css",
+		"/Users/holdengrissett/Desktop/c-programs/line-reverse.c",
+		"/Users/holdengrissett/Desktop/c-programs/line-condense.c",
+		"/Users/holdengrissett/Desktop/c-programs/wordparse.c",
+		"/Users/holdengrissett/Desktop/c-programs/temp.c",
+		"/Users/holdengrissett/Desktop/c-programs/char-freq-histogram.c",
+		"/Users/holdengrissett/Desktop/c-programs/wordlengthhistogram.c",
+		"/Users/holdengrissett/Desktop/c-programs/character-displayer.c",
+		"/Users/holdengrissett/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/holdengrissett/Desktop/c-programs/blank-space-shortener.c",
+		"/Users/holdengrissett/Desktop/c-programs/inputcounter.c",
+		"/Users/holdengrissett/Desktop/c-programs/EOF.c",
+		"/Users/holdengrissett/Desktop/holdensite/config/routes.rb",
+		"/Users/holdengrissett/Desktop/holdensite/app/views/landing/index.html.erb",
+		"/Applications/MAMP/htdocs/js/game.js",
+		"/Applications/MAMP/htdocs/js/behavior.js",
+		"/Applications/MAMP/htdocs/html/examples.html",
+		"/Applications/MAMP/htdocs/assets/maps/level1.json",
+		"/Applications/MAMP/htdocs/FlyingEnemy.js",
+		"/Applications/MAMP/htdocs/javascript/prefabs/Enemy.js",
+		"/Applications/MAMP/htdocs/javascript/prefabs/Player.js",
+		"/Applications/MAMP/htdocs/Prefab.js",
+		"/Applications/MAMP/htdocs/javascript/TiledState.js",
+		"/Applications/MAMP/htdocs/javascript/BootState.js",
+		"/Applications/MAMP/htdocs/javascript/LoadingState.js",
+		"/Applications/MAMP/htdocs/javascript/Boot.js",
+		"/Applications/MAMP/htdocs/css/styles.css",
+		"/Applications/MAMP/htdocs/assets/Levels.json",
+		"/Applications/MAMP/htdocs/html/game.html",
+		"/Applications/MAMP/htdocs/html/tweets.html",
+		"/Applications/MAMP/htdocs/javascript/Level1.js",
+		"/Applications/MAMP/htdocs/assets/Level1.json",
+		"/Users/holdengrissett/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
+		"/Applications/MAMP/htdocs/javascript/Preloader.js",
+		"/Applications/MAMP/htdocs/javascript/MainMenu.js",
+		"/Users/holdengrissett/Library/Application Support/Sublime Text 3/Packages/Boxy Theme Addon - Font Face/Boxy Ocean.sublime-theme",
+		"/Users/holdengrissett/Library/Application Support/Sublime Text 3/Packages/Alignment/Default (OSX).sublime-keymap",
+		"/Users/holdengrissett/Library/Application Support/Sublime Text 3/Packages/Terminal/Base File.sublime-settings",
+		"/Applications/MAMP/htdocs/javascript/behavior.js",
+		"/Users/holdengrissett/Desktop/Holberton-app-website/javascript/Preloader.js",
+		"/Users/holdengrissett/Desktop/Holberton-app-website/html/game.html",
+		"/Users/holdengrissett/Desktop/Holberton-app-website/javascript/Level1.js",
+		"/Users/holdengrissett/Desktop/Holberton-app-website/javascript/Boot.js",
+		"/Users/holdengrissett/Desktop/Holberton-app-website/html/tweets.html",
+		"/Users/holdengrissett/Desktop/Holberton-app-website/index.html",
+		"/Users/holdengrissett/Desktop/Holberton-app-website/javascript/phaser.js",
+		"/Users/holdengrissett/Desktop/Holberton-app-website/css/styles.css",
+		"/Users/holdengrissett/Desktop/Holberton-app-website/Level1.js",
+		"/Users/holdengrissett/Desktop/Holberton-app-website/MainMenu.js",
+		"/Users/holdengrissett/Desktop/Holberton-app-website/Preloader.js",
+		"/Users/holdengrissett/Desktop/Holberton-app-website/Boot.js",
+		"/Applications/MAMP/htdocs/part8.html",
+		"/Applications/MAMP/htdocs/part7.html",
+		"/Users/holdengrissett/Desktop/smart_box/js/app.js",
+		"/Users/holdengrissett/Desktop/mmt-storefront/config/initializers/spree.rb",
+		"/Users/holdengrissett/Desktop/mmt-storefront/gemfile",
+		"/Users/holdengrissett/Desktop/mmt-storefront/config/database.yml",
+		"/Users/holdengrissett/mmt-storefront/rakefile",
+		"/Users/holdengrissett/mmt-storefront/gemfile",
+		"/Users/holdengrissett/mmt-storefront/gemfile.lock",
+		"/Users/holdengrissett/mmt-storefront/config/database.yml",
+		"/Users/holdengrissett/mmt-storefront/Gemfile",
+		"/Users/holdengrissett/Desktop/mmt-storefront/Gemfile",
+		"/Users/holdengrissett/Desktop/mmt-dev-site/config/routes.rb",
+		"/Users/holdengrissett/Desktop/website-projects/blog/app/views/layouts/application.html.erb",
+		"/Users/holdengrissett/Desktop/website-projects/blog/app/controllers/comments_controller.rb",
+		"/Users/holdengrissett/Desktop/website-projects/blog/app/assets/stylesheets/screen.css",
+		"/Users/holdengrissett/Desktop/website-projects/blog/app/controllers/articles_controller.rb",
+		"/Users/holdengrissett/Desktop/website-projects/blog/app/models/article.rb",
+		"/Users/holdengrissett/Desktop/website-projects/blog/app/views/comments/_comment.html.erb",
+		"/Users/holdengrissett/Desktop/website-projects/blog/app/views/comments/_form.html.erb",
+		"/Users/holdengrissett/Desktop/website-projects/blog/app/views/articles/show.html.erb",
+		"/Users/holdengrissett/Desktop/website-projects/blog/config/routes.rb",
+		"/Users/holdengrissett/Desktop/website-projects/blog/app/models/comment.rb",
+		"/Users/holdengrissett/Desktop/website-projects/blog/app/views/articles/index.html.erb",
+		"/Users/holdengrissett/Desktop/website-projects/blog/app/views/articles/edit.html.erb",
+		"/Users/holdengrissett/Desktop/website-projects/blog/app/views/articles/_form.html.erb",
+		"/Users/holdengrissett/Desktop/website-projects/blog/app/views/articles/new.html.erb",
+		"/Users/holdengrissett/Desktop/blog/app/views/articles/new.html.erb",
+		"/Users/holdengrissett/Desktop/blog/app/models/article.rb",
+		"/Users/holdengrissett/Desktop/blog/app/controllers/articles_controller.rb",
+		"/Users/holdengrissett/Desktop/blog/app/views/articles/edit.html.erb",
+		"/Users/holdengrissett/Desktop/blog/app/views/articles/show.html.erb",
+		"/Users/holdengrissett/Desktop/blog/app/views/welcome/index.html.erb",
+		"/Users/holdengrissett/Desktop/blog/app/views/articles/index.html.erb",
+		"/Users/holdengrissett/Desktop/widget_shop/app/views/orders/show.html.erb",
+		"/Users/holdengrissett/Desktop/blog/config/routes.rb",
+		"/Users/holdengrissett/.ssh/id_rsa"
+	],
+	"find":
+	{
+		"height": 41.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "demo_code.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1526,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 44.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "maze.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"index.html"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 173.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
