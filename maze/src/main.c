@@ -31,34 +31,32 @@
 // 	- work out all bugs in renderer
 
 
-int main(void)
+int main(int argc, char **argv)
 {
-	int quit = 0;
-	int new_map[25];
+	int quit;
+	double frame_time, new_time, old_time;
 	SDL_Instance instance;
-	MAZE_Map map;
 	MAZE_Player player;
-	// SDL_RWops *file;
-	// char map_path[] = "../maps/map_1.map";
-	char *old_map = "1111100110011001100110011001100110011111";
-	for (int c = 0; old_map[c] != 0; c++)
-	{
-		if (old_map[c] == 49)
-			new_map[c] = 1;
-		else
-			new_map[c] = 0;
-	}
-	map.map = new_map;
-	map.width = 4;
-	map.height = 10;
+	MAZE_Map map;
+	quit = new_time = old_time = 0;
 
+	if (argc > 1)
+		map = import_map(argv[1], &player);
 
-	player.height = 128;
-	// player.x = TILE_SIZE * 3 - (TILE_SIZE / 2) - 32;
-	// player.y = TILE_SIZE * 6 - (TILE_SIZE / 2);
-	player.x = 438.187197;
-	player.y =797.032192;
-	player.orientation = 265;
+	// for (int i = 0; i < map.height; i++)
+	// {
+	// 	for (int j = 0; map.map[i][j] != '\n'; j++)
+	// 	{
+	// 		printf("%c", map.map[i][j]);
+	// 	}
+	// 	printf("\n");	
+	// }
+
+	player.dir.x = -1;
+	player.dir.y = 0;
+	player.plane.x = 0;
+	player.plane.y = 0.66;
+
 
 
 	if (init_instance(&instance) != 0)
@@ -68,10 +66,14 @@ int main(void)
 	{
 		SDL_SetRenderDrawColor(instance.renderer, 128, 255, 255, 255);
 		SDL_RenderClear(instance.renderer);
+		old_time = new_time;
 		draw_rays(instance, player, map);
+		new_time = clock();
+		frame_time = (new_time - old_time) / CLOCKS_PER_SEC;
+		//printf("FPS: %f\n", 1 / frame_time);
 		SDL_RenderPresent(instance.renderer);
-		if (poll_events(&player) == 1)
-			quit = 1;
+		if (poll_events(&player, map, frame_time) == 1)
+		quit = 1;
 	}
 	SDL_DestroyRenderer(instance.renderer);
 	SDL_DestroyWindow(instance.window);
@@ -80,11 +82,165 @@ int main(void)
 }
 
 
-int poll_events(MAZE_Player *player)
+void draw_rays(SDL_Instance instance, MAZE_Player player, MAZE_Map map)
 {
-	int left, right;
+	double camera_x, ray_pos_x, ray_pos_y, ray_dir_x, ray_dir_y, next_x, next_y;
+	double side_dist_x, side_dist_y, delta_dist_x, delta_dist_y, perp_wall_dist;
+	int map_x, map_y, hit, y_side, wall_height, wall_y1, wall_y2;
+
+	for (int x = 0; x < SCREEN_WIDTH; x++)
+	{
+		camera_x = 2 * x / (double)SCREEN_WIDTH - 1; // ranges from -1 to 1
+		ray_pos_x = player.pos.x;
+		ray_pos_y = player.pos.y;
+		ray_dir_x = player.dir.x + player.plane.x * camera_x;
+		ray_dir_y = player.dir.y + player.plane.y * camera_x;
+		//printf("ray_dir_y = %f\n", ray_dir_y);
+
+		map_x = (int)ray_pos_x;
+		map_y = (int)ray_pos_y;
+
+		delta_dist_x = sqrt(1 + (ray_dir_y * ray_dir_y) / (ray_dir_x * ray_dir_x));
+		delta_dist_y = sqrt(1 + (ray_dir_x * ray_dir_x) / (ray_dir_y * ray_dir_y));
+
+		if (ray_dir_x < 0) // ray is left
+		{
+			next_x = -1;
+			side_dist_x = (ray_pos_x - map_x) * delta_dist_x;
+		}
+		else // ray is right
+		{
+			next_x = 1;
+			side_dist_x = (map_x + 1.0 - ray_pos_x) * delta_dist_x;
+		}
+		if (ray_dir_y < 0) // ray is up
+		{
+			next_y = -1;
+			side_dist_y = (ray_pos_y - map_y) * delta_dist_y;
+			//printf("side_dist_y = %f\n", side_dist_y);
+		}
+		else // ray is down
+		{
+			next_y = 1;
+			side_dist_y = (map_y + 1.0 - ray_pos_y) * delta_dist_y;
+		}
+
+		hit = 0;
+		while (hit == 0)
+		{
+			if (side_dist_x < side_dist_y)
+			{
+				side_dist_x += delta_dist_x;
+				map_x += next_x;
+				y_side = 0;
+			}
+			else
+			{
+				side_dist_y += delta_dist_y;
+				map_y += next_y;
+				y_side = 1;
+			}
+			if (map.map[map_y][map_x] == 'W')
+			{
+				hit = 1;
+				//printf("map[%d][%d] = %c\n", map_x, map_y, map.map[map_x][map_y]);
+			}
+			
+		}
+
+		if (y_side == 0) perp_wall_dist = (map_x - ray_pos_x + (1 - next_x) / 2) / ray_dir_x;
+		else 			 perp_wall_dist = (map_y - ray_pos_y + (1 - next_y) / 2) / ray_dir_y;
+
+		wall_height = (int)(SCREEN_HEIGHT / perp_wall_dist);
+
+		wall_y1 = SCREEN_Y_MIDDLE + (wall_height / 2);
+		wall_y2 = SCREEN_Y_MIDDLE - (wall_height / 2);
+
+		if (y_side) SDL_SetRenderDrawColor(instance.renderer, 200, 200, 200, 0xFF);
+		else		SDL_SetRenderDrawColor(instance.renderer, 100, 100, 100, 0xFF);
+
+		SDL_RenderDrawLine(instance.renderer, x, wall_y1, x, wall_y2);
+	}
+
+}
+
+
+MAZE_Map import_map(char *file_str, MAZE_Player *player)
+{
+	int read;
+	size_t line_count, line_length, width, i;
+	FILE *map_file;
+	MAZE_Map *map;
+	char *line = NULL;
+	read = 0;
+
+	if ((map = malloc(sizeof(MAZE_Map))) == NULL)
+	{
+		printf("Malloc failed to allocate space for map!\n");
+		exit(1);
+	}
+
+	if ((map_file = fopen(file_str, "r")) == NULL)
+	{
+		printf("Map file not found!\n");
+		exit(1);
+	}
+
+	read = getline(&line, &line_length, map_file);
+	if (read == -1)
+	{
+		printf("Map file is empty!\n");
+		exit(1);
+	}
+
+	for (line_count = 0; read != -1; line_count++)
+		read = getline(&line, &line_length, map_file);
+
+	map->height = line_count;
+	map->map = malloc(line_count * sizeof(int *));
+	if (map->map == NULL)
+	{
+		printf("Malloc failed to allocate space for map!\n");
+		exit(1);
+	}
+	rewind(map_file);
+	read = getline(&line, &line_length, map_file);
+	for (line_count = 0; read != -1; line_count++)
+	{
+		// find width of map line
+		for (width = 0; line[width] != '\0'; width++)
+			;
+
+		map->map[line_count] = malloc(width * sizeof(char) + 1);
+		for (i = 0; i < width; i++)
+		{
+			if (line[i] == 'P')
+			{
+				player->pos.x = i;
+				player->pos.y = line_count;
+				map->map[line_count][i] = '0';
+			}
+			else if (line[i] == ' ' || line[i] == '0')
+				map->map[line_count][i] = '0';
+			else
+				map->map[line_count][i] = line[i];
+		}
+		map->map[line_count][width] = '\0';
+		read = getline(&line, &line_length, map_file);
+	}
+	fclose(map_file);
+	free(line);
+	return (*map);
+}
+
+
+int poll_events(MAZE_Player *player, MAZE_Map map, double frame_time)
+{
+	double old_dir_x, old_plane_x, speed, rot_speed;
 	SDL_Event event;
 	SDL_KeyboardEvent key;
+	speed = frame_time * 500;
+	rot_speed = frame_time * 300;
 
 	while (SDL_PollEvent(&event))
 	{
@@ -99,205 +255,43 @@ int poll_events(MAZE_Player *player)
 					return (1);
 				else if (key.keysym.scancode == SDL_SCANCODE_A)
 				{
-					player->orientation += 5;
-					if (player->orientation > 360)
-						player->orientation -= 360;
+					old_dir_x = player->dir.x;
+					old_plane_x = player->plane.x;
+					player->dir.x = player->dir.x * cos(rot_speed) - player->dir.y * sin(rot_speed);
+					player->dir.y = old_dir_x * sin(rot_speed) + player->dir.y * cos(rot_speed);
+					player->plane.x = player->plane.x * cos(rot_speed) - player->plane.y * sin(rot_speed);
+					player->plane.y = old_plane_x * sin(rot_speed) + player->plane.y * cos(rot_speed);
 				}
 				else if (key.keysym.scancode == SDL_SCANCODE_D)
 				{
-					player->orientation -= 5;
-					if (player->orientation < 0)
-						player->orientation += 360;
+					old_dir_x = player->dir.x;
+					old_plane_x = player->plane.x;
+					player->dir.x = player->dir.x * cos(-rot_speed) - player->dir.y * sin(-rot_speed);
+					player->dir.y = old_dir_x * sin(-rot_speed) + player->dir.y * cos(-rot_speed);
+					player->plane.x = player->plane.x * cos(-rot_speed) - player->plane.y * sin(-rot_speed);
+					player->plane.y = old_plane_x * sin(-rot_speed) + player->plane.y * cos(-rot_speed);
 				}
 				else if (key.keysym.scancode == SDL_SCANCODE_W)
 				{
-					player->x += 20 * cos(d_to_r(player->orientation));
-					player->y -= 20 * sin(d_to_r(player->orientation));
-					printf("player.x: %f\nplayer.y: %f\n", player->x, player->y);
-					printf("fov center: %f\n", player->orientation);
+					if (map.map[(int)player->pos.y][(int)(player->pos.x + player->dir.x * speed)] == '0')
+						player->pos.x += player->dir.x * speed;
+					if (map.map[(int)(player->pos.y + player->dir.y * speed)][(int)player->pos.x] == '0')
+						player->pos.y += player->dir.y * speed;
 				}
 				else if (key.keysym.scancode == SDL_SCANCODE_S)
 				{
-					player->x -= 10 * cos(d_to_r(player->orientation));
-					player->y += 10 * sin(d_to_r(player->orientation));
+					if (map.map[(int)player->pos.y][(int)(player->pos.x + player->dir.x * speed)] == '0')
+						player->pos.x -= player->dir.x * speed;
+					if (map.map[(int)(player->pos.y + player->dir.y * speed)][(int)player->pos.x] == '0')
+						player->pos.y -= player->dir.y * speed;
 				}
 			}
-			case SDL_KEYUP:
-			{
-				key = event.key;
-				if (key.keysym.scancode == SDL_SCANCODE_A)
-					left = 0;
-				else if (key.keysym.scancode == SDL_SCANCODE_D)
-					right = 0;
-			}
 		}
-		// if (left) ;
-		// if (right) ;
 	}
 	return (0);
 }
 
-double d_to_r(double degrees)
-{
-	return (M_PI * (double)degrees) / 180;
-}
 
-// SDL_RWops import_map(map_path)
-// {
-
-// }
-
-// print out map
-// for (int i = 0; i < map.height; i++)
-// 	{
-// 		for (int j = 0; j < map.width; j++)
-// 		{
-// 			printf("%i", map.map[i * map.width + j]);
-// 		}
-// 		printf("\n");
-// 	}
-
-void draw_rays(SDL_Instance instance, MAZE_Player player, MAZE_Map map)
-{
-	int flag, grid_index_x, grid_index_y;
-	double horizontal_tile_x, horizontal_tile_y, vertical_tile_x, vertical_tile_y;
-	double arc, tan_arc, sin_arc, cos_arc;
-	double next_x, next_y, horizontal_d, vertical_d;
-	double distorted_distance, distance, wall_height, wall_y1, wall_y2;
-	arc = player.orientation + (FOV / 2);
-	flag = 0;
-	if (arc >= 360) // correct arc angle
-		arc -= 360;
-
-
-	for (int column = 0; column < SCREEN_WIDTH; column++)
-	{
-		tan_arc = tan(d_to_r(arc));
-		sin_arc = sin(d_to_r(arc));
-		cos_arc = cos(d_to_r(arc));
-
-		// Find horizontal walls
-		if (arc > 0 && arc < 180) // ray is up
-		{
-			horizontal_tile_y = floor(player.y / TILE_SIZE) * TILE_SIZE - 1;
-			horizontal_tile_x = player.x + (player.y - horizontal_tile_y) / tan_arc;
-			next_y = -TILE_SIZE;
-		}
-		else // ray is down
-		{
-			horizontal_tile_y = floor(player.y / TILE_SIZE) * TILE_SIZE + TILE_SIZE;
-			horizontal_tile_x = player.x + (player.y - horizontal_tile_y) / tan_arc;
-			next_y = TILE_SIZE;
-		}
-		next_x = TILE_SIZE / tan_arc;
-		if (fabs(arc - 0) < EPSILON || fabs(arc - 180) < EPSILON) // ray is facing exactly 0 or 180 degrees
-			horizontal_d = INT_MAX;
-		else
-		{
-			while (1) // search for walls
-			{
-				grid_index_y = horizontal_tile_y / TILE_SIZE;
-				grid_index_x = horizontal_tile_x / TILE_SIZE;
-				if (grid_index_x >= map.width || grid_index_y >= map.height ||
-					grid_index_x < 0 || grid_index_y < 0)
-				{
-					horizontal_d = INT_MAX;
-					break;
-				}
-				else if (map.map[grid_index_y * map.width + grid_index_x] == 1)
-				{
-					//horizontal_d = fabs((player.x - horizontal_tile_x) / cos_arc);
-					horizontal_d = sqrt(pow((player.x - horizontal_tile_x), 2) + pow((player.y - horizontal_tile_y), 2));
-					// if (horizontal_d < 0)
-					// 	horizontal_d = INT_MAX;
-					break;
-				}
-				else
-				{
-					horizontal_tile_y += next_y;
-					horizontal_tile_x += next_x;
-				}
-			}
-		}
-
-
-		// Find vertical walls
-		if (arc > 90 && arc < 270) // ray is left
-		{
-			vertical_tile_x = floor(player.x / TILE_SIZE) * TILE_SIZE - 1;
-			vertical_tile_y = player.y + (player.x - vertical_tile_x) * tan_arc;
-			next_x = -TILE_SIZE;
-		}
-		else // ray is right
-		{
-			vertical_tile_x = floor(player.x / TILE_SIZE) * TILE_SIZE + TILE_SIZE;
-			vertical_tile_y = player.y + (player.x - vertical_tile_x) * tan_arc;
-			next_x = TILE_SIZE;
-		}
-		next_y = TILE_SIZE * tan_arc;
-		if (fabs(arc - 90) < EPSILON || fabs(arc - 270) < EPSILON) // ray is facing exactly 90 or 270 degrees
-			vertical_d = INT_MAX;
-		else
-		{
-			while (1)
-			{
-				grid_index_x = vertical_tile_x / TILE_SIZE;
-				grid_index_y = vertical_tile_y / TILE_SIZE;
-				if (grid_index_x >= map.width || grid_index_y >= map.height ||
-					grid_index_x < 0 || grid_index_y < 0)
-				{
-					vertical_d = INT_MAX;
-					break;
-				}
-				else if (map.map[grid_index_y * map.width + grid_index_x] == 1)
-				{
-					//vertical_d = (player.x - vertical_tile_x) / cos_arc;
-					vertical_d = sqrt(pow((player.x - vertical_tile_x), 2) + pow((player.y - vertical_tile_y), 2));
-					// if (vertical_d < 0)
-					// 	vertical_d = INT_MAX;
-					break;
-				}
-				else
-				{
-					vertical_tile_y += next_y;
-					vertical_tile_x += next_x;
-				}
-			}
-		}
-		if (vertical_d < horizontal_d)
-		{
-			SDL_SetRenderDrawColor(instance.renderer, 100, 100, 100, 0xFF);
-			distorted_distance = vertical_d;
-		}
-		else
-		{
-			SDL_SetRenderDrawColor(instance.renderer, 200, 200, 200, 0xFF);
-			distorted_distance = horizontal_d;
-		}
-		distance = distorted_distance * cos(d_to_r(player.orientation - arc));
-
-
-		wall_height = DIVIDEBYDISTANCE / (distance + EPSILON);
-		wall_y1 = SCREEN_Y_MIDDLE + (wall_height / 2);
-		wall_y2 = SCREEN_Y_MIDDLE - (wall_height / 2);
-		SDL_RenderDrawLine(instance.renderer, column, wall_y1, column, wall_y2);
-		if (arc > 264 && arc < 266 && distorted_distance == vertical_d && flag == 0)
-		{
-			// printf("distance: %f, arc: %f\n", distance, arc);
-			// printf("vertical_d: %f, horizontal_d: %f\n", vertical_d, horizontal_d);
-			// printf("vertical_d = (%f - %f) / %f\n\n", player.x, vertical_tile_x, cos(d_to_r(arc)));
-			// printf("horizontal_d = (%f - %f) / %f\n\n", player.y, horizontal_tile_y, sin(d_to_r(arc)));
-			// printf("vertical_tile_y: %f\n\n", vertical_tile_y);
-			printf("(player.x(%f) / 256) * 256 - 1 = %f\n", player.x, vertical_tile_x);
-			printf("player.y(%f) + (player.x(%f) - %f) * %f = %f\n", player.y, player.x, vertical_tile_x, tan_arc, vertical_tile_y);
-			flag = 1;
-		}
-
-		arc -= ((double)FOV / (double)SCREEN_WIDTH);
-		if (arc < 0) // correct arc angle
-			arc += 360;
-	}
-}
 
 
 int init_instance(SDL_Instance *instance)

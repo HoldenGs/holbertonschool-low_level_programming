@@ -3,10 +3,9 @@
 
 typedef struct MAZE_Player_s
 {
-	int height;
-	double x;
-	double y;
-	double orientation;
+	Vector pos;
+	Vector dir;
+	Vector plane;
 } MAZE_Player;
 
 #endif
