@@ -280,9 +280,9 @@ int poll_events(MAZE_Player *player, MAZE_Map map, double frame_time)
 				}
 				else if (key.keysym.scancode == SDL_SCANCODE_S)
 				{
-					if (map.map[(int)player->pos.y][(int)(player->pos.x + player->dir.x * speed)] == '0')
+					if (map.map[(int)player->pos.y][(int)(player->pos.x - player->dir.x * speed)] == '0')
 						player->pos.x -= player->dir.x * speed;
-					if (map.map[(int)(player->pos.y + player->dir.y * speed)][(int)player->pos.x] == '0')
+					if (map.map[(int)(player->pos.y - player->dir.y * speed)][(int)player->pos.x] == '0')
 						player->pos.y -= player->dir.y * speed;
 				}
 			}
