@@ -31,10 +31,20 @@ typedef struct SDL_Instance
 } SDL_Instance;
 
 
+typedef struct MAZE_Keys_s
+{
+	int left;
+	int right;
+	int forward;
+	int backward;
+} MAZE_Keys;
+
+
 int init_instance(SDL_Instance *);
 void draw_rays(SDL_Instance, MAZE_Player, MAZE_Map);
 MAZE_Map import_map(char *, MAZE_Player *);
-int poll_events(MAZE_Player *, MAZE_Map, double);
+int poll_events(MAZE_Keys *);
+void move_player(MAZE_Player *, MAZE_Keys, MAZE_Map, double);
 double d_to_r(double);
 
 #endif

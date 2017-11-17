@@ -25,17 +25,13 @@
 #define ANGLE0 0
 
 
-// TODO:
-// 	- connect player struct to renderer
-// 	- connect map struct to renderer
-// 	- work out all bugs in renderer
-
 
 int main(int argc, char **argv)
 {
 	int quit;
 	double frame_time, new_time, old_time;
 	SDL_Instance instance;
+	MAZE_Keys keys;
 	MAZE_Player player;
 	MAZE_Map map;
 	quit = new_time = old_time = 0;
@@ -52,6 +48,8 @@ int main(int argc, char **argv)
 	// 	printf("\n");	
 	// }
 
+	// Initialize keys and player attributes
+	keys.left = keys.right = keys.forward = keys.backward = 0;
 	player.dir.x = -1;
 	player.dir.y = 0;
 	player.plane.x = 0;
@@ -72,13 +70,55 @@ int main(int argc, char **argv)
 		frame_time = (new_time - old_time) / CLOCKS_PER_SEC;
 		//printf("FPS: %f\n", 1 / frame_time);
 		SDL_RenderPresent(instance.renderer);
-		if (poll_events(&player, map, frame_time) == 1)
-		quit = 1;
+		if (poll_events(&keys) == 1)
+			quit = 1;
+		move_player(&player, keys, map, frame_time);
 	}
 	SDL_DestroyRenderer(instance.renderer);
 	SDL_DestroyWindow(instance.window);
 	SDL_Quit();
 	return (0);
+}
+
+
+void move_player(MAZE_Player *player, MAZE_Keys keys, MAZE_Map map, double frame_time)
+{
+	double old_dir_x, old_plane_x, speed, rot_speed;
+	speed = frame_time * 50;
+	rot_speed = frame_time * 30;
+
+	if (keys.left)
+	{
+		old_dir_x = player->dir.x;
+		old_plane_x = player->plane.x;
+		player->dir.x = player->dir.x * cos(rot_speed) - player->dir.y * sin(rot_speed);
+		player->dir.y = old_dir_x * sin(rot_speed) + player->dir.y * cos(rot_speed);
+		player->plane.x = player->plane.x * cos(rot_speed) - player->plane.y * sin(rot_speed);
+		player->plane.y = old_plane_x * sin(rot_speed) + player->plane.y * cos(rot_speed);
+	}
+	if (keys.right)
+	{
+		old_dir_x = player->dir.x;
+		old_plane_x = player->plane.x;
+		player->dir.x = player->dir.x * cos(-rot_speed) - player->dir.y * sin(-rot_speed);
+		player->dir.y = old_dir_x * sin(-rot_speed) + player->dir.y * cos(-rot_speed);
+		player->plane.x = player->plane.x * cos(-rot_speed) - player->plane.y * sin(-rot_speed);
+		player->plane.y = old_plane_x * sin(-rot_speed) + player->plane.y * cos(-rot_speed);
+	}
+	if (keys.forward)
+	{
+		if (map.map[(int)player->pos.y][(int)(player->pos.x + player->dir.x * speed)] == '0')
+			player->pos.x += player->dir.x * speed;
+		if (map.map[(int)(player->pos.y + player->dir.y * speed)][(int)player->pos.x] == '0')
+			player->pos.y += player->dir.y * speed;
+	}
+	if (keys.backward)
+	{
+		if (map.map[(int)player->pos.y][(int)(player->pos.x - player->dir.x * speed)] == '0')
+			player->pos.x -= player->dir.x * speed;
+		if (map.map[(int)(player->pos.y - player->dir.y * speed)][(int)player->pos.x] == '0')
+			player->pos.y -= player->dir.y * speed;
+	}
 }
 
 
@@ -95,7 +135,6 @@ void draw_rays(SDL_Instance instance, MAZE_Player player, MAZE_Map map)
 		ray_pos_y = player.pos.y;
 		ray_dir_x = player.dir.x + player.plane.x * camera_x;
 		ray_dir_y = player.dir.y + player.plane.y * camera_x;
-		//printf("ray_dir_y = %f\n", ray_dir_y);
 
 		map_x = (int)ray_pos_x;
 		map_y = (int)ray_pos_y;
@@ -117,7 +156,6 @@ void draw_rays(SDL_Instance instance, MAZE_Player player, MAZE_Map map)
 		{
 			next_y = -1;
 			side_dist_y = (ray_pos_y - map_y) * delta_dist_y;
-			//printf("side_dist_y = %f\n", side_dist_y);
 		}
 		else // ray is down
 		{
@@ -126,7 +164,7 @@ void draw_rays(SDL_Instance instance, MAZE_Player player, MAZE_Map map)
 		}
 
 		hit = 0;
-		while (hit == 0)
+		while (hit == 0) // search for wall
 		{
 			if (side_dist_x < side_dist_y)
 			{
@@ -141,11 +179,7 @@ void draw_rays(SDL_Instance instance, MAZE_Player player, MAZE_Map map)
 				y_side = 1;
 			}
 			if (map.map[map_y][map_x] == 'W')
-			{
 				hit = 1;
-				//printf("map[%d][%d] = %c\n", map_x, map_y, map.map[map_x][map_y]);
-			}
-			
 		}
 
 		if (y_side == 0) perp_wall_dist = (map_x - ray_pos_x + (1 - next_x) / 2) / ray_dir_x;
@@ -234,57 +268,41 @@ MAZE_Map import_map(char *file_str, MAZE_Player *player)
 }
 
 
-int poll_events(MAZE_Player *player, MAZE_Map map, double frame_time)
+int poll_events(MAZE_Keys *keys)
 {
-	double old_dir_x, old_plane_x, speed, rot_speed;
 	SDL_Event event;
 	SDL_KeyboardEvent key;
-	speed = frame_time * 500;
-	rot_speed = frame_time * 300;
 
 	while (SDL_PollEvent(&event))
 	{
-		switch (event.type)
+		key = event.key;
+		if (event.key.repeat == 0)
 		{
-			case SDL_QUIT:
+			if (event.type == SDL_QUIT)
 				return (1);
-			case SDL_KEYDOWN:
+			else if (event.type == SDL_KEYDOWN)
 			{
-				key = event.key;
 				if (key.keysym.scancode == 0x29)
 					return (1);
-				else if (key.keysym.scancode == SDL_SCANCODE_A)
-				{
-					old_dir_x = player->dir.x;
-					old_plane_x = player->plane.x;
-					player->dir.x = player->dir.x * cos(rot_speed) - player->dir.y * sin(rot_speed);
-					player->dir.y = old_dir_x * sin(rot_speed) + player->dir.y * cos(rot_speed);
-					player->plane.x = player->plane.x * cos(rot_speed) - player->plane.y * sin(rot_speed);
-					player->plane.y = old_plane_x * sin(rot_speed) + player->plane.y * cos(rot_speed);
-				}
-				else if (key.keysym.scancode == SDL_SCANCODE_D)
-				{
-					old_dir_x = player->dir.x;
-					old_plane_x = player->plane.x;
-					player->dir.x = player->dir.x * cos(-rot_speed) - player->dir.y * sin(-rot_speed);
-					player->dir.y = old_dir_x * sin(-rot_speed) + player->dir.y * cos(-rot_speed);
-					player->plane.x = player->plane.x * cos(-rot_speed) - player->plane.y * sin(-rot_speed);
-					player->plane.y = old_plane_x * sin(-rot_speed) + player->plane.y * cos(-rot_speed);
-				}
-				else if (key.keysym.scancode == SDL_SCANCODE_W)
-				{
-					if (map.map[(int)player->pos.y][(int)(player->pos.x + player->dir.x * speed)] == '0')
-						player->pos.x += player->dir.x * speed;
-					if (map.map[(int)(player->pos.y + player->dir.y * speed)][(int)player->pos.x] == '0')
-						player->pos.y += player->dir.y * speed;
-				}
-				else if (key.keysym.scancode == SDL_SCANCODE_S)
-				{
-					if (map.map[(int)player->pos.y][(int)(player->pos.x - player->dir.x * speed)] == '0')
-						player->pos.x -= player->dir.x * speed;
-					if (map.map[(int)(player->pos.y - player->dir.y * speed)][(int)player->pos.x] == '0')
-						player->pos.y -= player->dir.y * speed;
-				}
+				if (key.keysym.scancode == SDL_SCANCODE_A)
+					keys->left = 1;				
+				if (key.keysym.scancode == SDL_SCANCODE_D)
+					keys->right = 1;
+				if (key.keysym.scancode == SDL_SCANCODE_W)
+					keys->forward = 1;
+				if (key.keysym.scancode == SDL_SCANCODE_S)
+					keys->backward = 1;
+			}
+			else if (event.type == SDL_KEYUP)
+			{
+				if (key.keysym.scancode == SDL_SCANCODE_A)
+					keys->left = 0;
+				if (key.keysym.scancode == SDL_SCANCODE_D)
+					keys->right = 0;
+				if (key.keysym.scancode == SDL_SCANCODE_W)
+					keys->forward = 0;
+				if (key.keysym.scancode == SDL_SCANCODE_S)
+					keys->backward = 0;
 			}
 		}
 	}
