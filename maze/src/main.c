@@ -39,25 +39,8 @@ int main(int argc, char **argv)
 	if (argc > 1)
 		map = import_map(argv[1], &player);
 
-	// for (int i = 0; i < map.height; i++)
-	// {
-	// 	for (int j = 0; map.map[i][j] != '\n'; j++)
-	// 	{
-	// 		printf("%c", map.map[i][j]);
-	// 	}
-	// 	printf("\n");	
-	// }
-
-	// Initialize keys and player attributes
-	keys.left = keys.right = keys.forward = keys.backward = 0;
-	player.dir.x = -1;
-	player.dir.y = 0;
-	player.plane.x = 0;
-	player.plane.y = 0.66;
-
-
-
-	if (init_instance(&instance) != 0)
+	// Initialize keys, player attributes, and instance window/renderer
+	if (init_instance(&instance, &keys, &player) != 0)
 		return (1);
 
 	while (!quit)
@@ -83,7 +66,7 @@ int main(int argc, char **argv)
 
 void move_player(MAZE_Player *player, MAZE_Keys keys, MAZE_Map map, double frame_time)
 {
-	double old_dir_x, old_plane_x, speed, rot_speed;
+	double old_dir_x, old_plane_x, speed, rot_speed, dir_x_90, dir_y_90;
 	speed = frame_time * 50;
 	rot_speed = frame_time * 30;
 
@@ -118,6 +101,24 @@ void move_player(MAZE_Player *player, MAZE_Keys keys, MAZE_Map map, double frame
 			player->pos.x -= player->dir.x * speed;
 		if (map.map[(int)(player->pos.y - player->dir.y * speed)][(int)player->pos.x] == '0')
 			player->pos.y -= player->dir.y * speed;
+	}
+	if (keys.strafe_left)
+	{
+		dir_x_90 = player->dir.x * cos(1.5708) - player->dir.y * sin(1.5708);
+		dir_y_90 = player->dir.x * sin(1.5708) + player->dir.y * cos(1.5708);
+		if (map.map[(int)player->pos.y][(int)(player->pos.x + dir_x_90 * speed)] == '0')
+			player->pos.x += dir_x_90 * speed;
+		if (map.map[(int)(player->pos.y + dir_y_90 * speed)][(int)player->pos.x] == '0')
+			player->pos.y += dir_y_90 * speed;
+	}
+	if (keys.strafe_right)
+	{
+		dir_x_90 = player->dir.x * cos(1.5708) - player->dir.y * sin(1.5708);
+		dir_y_90 = player->dir.x * sin(1.5708) + player->dir.y * cos(1.5708);
+		if (map.map[(int)player->pos.y][(int)(player->pos.x - dir_x_90 * speed)] == '0')
+			player->pos.x -= dir_x_90 * speed;
+		if (map.map[(int)(player->pos.y - dir_y_90 * speed)][(int)player->pos.x] == '0')
+			player->pos.y -= dir_y_90 * speed;
 	}
 }
 
@@ -292,6 +293,10 @@ int poll_events(MAZE_Keys *keys)
 					keys->forward = 1;
 				if (key.keysym.scancode == SDL_SCANCODE_S)
 					keys->backward = 1;
+				if (key.keysym.scancode == SDL_SCANCODE_Q)
+					keys->strafe_left = 1;
+				if (key.keysym.scancode == SDL_SCANCODE_E)
+					keys->strafe_right = 1;
 			}
 			else if (event.type == SDL_KEYUP)
 			{
@@ -303,6 +308,10 @@ int poll_events(MAZE_Keys *keys)
 					keys->forward = 0;
 				if (key.keysym.scancode == SDL_SCANCODE_S)
 					keys->backward = 0;
+				if (key.keysym.scancode == SDL_SCANCODE_Q)
+					keys->strafe_left = 0;
+				if (key.keysym.scancode == SDL_SCANCODE_E)
+					keys->strafe_right = 0;
 			}
 		}
 	}
@@ -312,7 +321,7 @@ int poll_events(MAZE_Keys *keys)
 
 
 
-int init_instance(SDL_Instance *instance)
+int init_instance(SDL_Instance *instance, MAZE_Keys *keys, MAZE_Player *player)
 {
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
 	{
@@ -338,5 +347,10 @@ int init_instance(SDL_Instance *instance)
 		SDL_Quit();
 		return (1);
 	}
+	keys->left = keys->right = keys->forward = keys->backward = keys->strafe_left = keys->strafe_right = 0;
+	player->dir.x = -1;
+	player->dir.y = 0;
+	player->plane.x = 0;
+	player->plane.y = 0.66;
 	return (0);
 }

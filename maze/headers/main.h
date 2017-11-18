@@ -37,10 +37,12 @@ typedef struct MAZE_Keys_s
 	int right;
 	int forward;
 	int backward;
+	int strafe_left;
+	int strafe_right;
 } MAZE_Keys;
 
 
-int init_instance(SDL_Instance *);
+int init_instance(SDL_Instance *, MAZE_Keys *, MAZE_Player *);
 void draw_rays(SDL_Instance, MAZE_Player, MAZE_Map);
 MAZE_Map import_map(char *, MAZE_Player *);
 int poll_events(MAZE_Keys *);
