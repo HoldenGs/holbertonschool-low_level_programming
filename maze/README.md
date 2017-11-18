@@ -5,10 +5,15 @@ This is my first video game I've made on my own. Just a fun personal project.
 ## Controls
 
 W - forward
+
 S - backward
+
 A - turn left
+
 D - turn right
+
 Q - strafe left
+
 E - strafe right
 
 ## Create a map
@@ -16,7 +21,9 @@ E - strafe right
 Make a text file and use the following characters for the map:
 
 'W' - Wall
+
 ' ' or '0' - Space
+
 'P' - Player
 
 Make sure to enclose the player in spaces and enclose spaces with walls.
