@@ -1,5 +1,7 @@
 # Maze Prototype (WIP)
 
+This is my first video game I've made on my own. Just a fun personal project.
+
 ## Controls
 
 W - forward
