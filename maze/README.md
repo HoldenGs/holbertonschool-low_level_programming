@@ -1,6 +1,6 @@
-### Maze Prototype (WIP)
+## Maze Prototype (WIP)
 
-# Controls
+### Controls
 
 W - forward
 S - backward
@@ -9,7 +9,7 @@ D - turn right
 Q - strafe left
 E - strafe right
 
-# Create a map
+### Create a map
 
 Make a text file and use the following characters for the map:
 
@@ -19,7 +19,7 @@ Make a text file and use the following characters for the map:
 
 Make sure to enclose the player in spaces and enclose spaces with walls.
 
-# Run the game
+### Run the game
 
 To compile the game, you must have SDL2.0 installed.
 
