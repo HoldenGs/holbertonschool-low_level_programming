@@ -1,7 +1,7 @@
 
 
 OBJECTS=main.o
-CFLAGS=-c -Wall -Werror -Wextra -pedantic
+CFLAGS=-g -c -Wall -Werror -Wextra -pedantic
 
 all: maze_binary
 
