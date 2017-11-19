@@ -31,10 +31,15 @@ int main(int argc, char **argv)
 	int quit;
 	double frame_time, new_time, old_time;
 	SDL_Instance instance;
+	SDL_Rect rect;
 	MAZE_Keys keys;
 	MAZE_Player player;
 	MAZE_Map map;
 	quit = new_time = old_time = 0;
+	rect.x = 0;
+	rect.y = SCREEN_HEIGHT / 2;
+	rect.w = SCREEN_WIDTH;
+	rect.h = SCREEN_HEIGHT / 2;
 
 	if (argc > 1)
 		map = import_map(argv[1], &player);
@@ -47,6 +52,8 @@ int main(int argc, char **argv)
 	{
 		SDL_SetRenderDrawColor(instance.renderer, 128, 255, 255, 255);
 		SDL_RenderClear(instance.renderer);
+		SDL_SetRenderDrawColor(instance.renderer, 0, 180, 100, 255);
+		SDL_RenderFillRect(instance.renderer, &rect);
 		old_time = new_time;
 		draw_rays(instance, player, map);
 		new_time = clock();
