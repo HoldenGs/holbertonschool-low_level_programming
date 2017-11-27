@@ -199,7 +199,7 @@ void draw_rays(SDL_Instance instance, MAZE_Player player, MAZE_Map map)
 		wall_y2 = SCREEN_Y_MIDDLE - (wall_height / 2);
 
 		if (y_side) SDL_SetRenderDrawColor(instance.renderer, 200, 200, 200, 0xFF);
-		else		SDL_SetRenderDrawColor(instance.renderer, 100, 100, 100, 0xFF);
+		else		SDL_SetRenderDrawColor(instance.renderer, 150, 150, 150, 0xFF);
 
 		SDL_RenderDrawLine(instance.renderer, x, wall_y1, x, wall_y2);
 	}
@@ -284,11 +284,11 @@ int poll_events(MAZE_Keys *keys)
 	while (SDL_PollEvent(&event))
 	{
 		key = event.key;
+		if (event.type == SDL_QUIT)
+				return (1);
 		if (event.key.repeat == 0)
 		{
-			if (event.type == SDL_QUIT)
-				return (1);
-			else if (event.type == SDL_KEYDOWN)
+			if (event.type == SDL_KEYDOWN)
 			{
 				if (key.keysym.scancode == 0x29)
 					return (1);
